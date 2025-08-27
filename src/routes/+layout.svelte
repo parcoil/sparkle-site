@@ -5,6 +5,7 @@
 	import Nav from '$lib/components/nav.svelte';
 	import Footer from '$lib/components/footer.svelte';
 	import { browser } from '$app/environment';
+	import { Toaster } from '$lib/components/ui/sonner/index.js';
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
 	import posthog from 'posthog-js';
 	let { children } = $props();
@@ -21,5 +22,6 @@
 
 <ModeWatcher />
 <Nav />
+<Toaster />
 {@render children?.()}
 <Footer />

@@ -8,6 +8,7 @@
 		ChevronDown,
 		Star,
 		Zap,
+		Copy,
 		Trash2,
 		Package,
 		Wrench,
@@ -20,6 +21,7 @@
 	import { page } from '$app/stores';
 	import posthog from 'posthog-js';
 	import { browser } from '$app/environment';
+	import { toast } from 'svelte-sonner';
 
 	let showMovedAlert = false;
 
@@ -196,6 +198,7 @@
 		<p class="mb-6 text-lg text-muted-foreground">
 			The ultimate tool to optimize Windows and boost gaming performance
 		</p>
+
 		<div class="mb-6 flex items-center justify-center space-x-4">
 			<p class="text-sm font-medium text-muted-foreground">
 				Latest Version <span class="font-semibold text-primary">{version}</span>
@@ -204,6 +207,7 @@
 				Downloads <span class="font-semibold text-primary">{downloads}</span>
 			</p>
 		</div>
+
 		<div class="flex space-x-4">
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger>
@@ -233,7 +237,24 @@
 				</Button>
 			</a>
 		</div>
-
+		<div class="group relative mt-6 max-w-2xl">
+			<button
+				class="flex items-center gap-2 rounded-md bg-muted px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted/80"
+				on:click={(e) => {
+					const command = 'irm https://getsparkle.net/get | iex';
+					navigator.clipboard.writeText(command);
+					toast.success('Copied to clipboard');
+				}}
+			>
+				<Copy class="h-4 w-4" />
+				<span class="font-mono text-sm">irm https://getsparkle.net/get | iex</span>
+			</button>
+			<span
+				class="absolute -bottom-5 text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+			>
+				Click to copy PowerShell command
+			</span>
+		</div>
 		<img
 			src="https://raw.githubusercontent.com/Parcoil/Sparkle/refs/heads/v2/images/appshowcase.png"
 			alt="Sparkle Logo"
