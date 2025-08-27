@@ -40,5 +40,9 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"posthog-js": "^1.260.3",
+		"posthog-node": "^5.8.0"
 	}
 }
