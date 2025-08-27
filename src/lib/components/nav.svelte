@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+	import posthog from 'posthog-js';
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { cn } from '$lib/utils';
@@ -37,17 +39,24 @@
 	});
 
 	function handleDownload(type: 'exe' | 'zip') {
-		if (type === 'exe') {
-			window.open(
-				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`,
-				'_blank'
-			);
-		} else {
-			window.open(
-				'https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip',
-				'_blank'
-			);
-		}
+    if (browser) {
+      posthog.capture("sparkle_download_button", {
+        download_type: type,
+        app_version: version || "unknown",
+      });
+    }
+    
+    if (type === 'exe') {
+      window.open(
+        `https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`,
+        '_blank'
+      );
+    } else {
+      window.open(
+        'https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip',
+        '_blank'
+      );
+    }
 	}
 </script>
 

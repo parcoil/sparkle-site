@@ -14,8 +14,33 @@
 	} from '@lucide/svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import * as Card from '$lib/components/ui/card';
+	import { browser } from '$app/environment';
+	import posthog from 'posthog-js';
+
 	let version = $state('');
 	let downloads = $state('');
+
+	function handleDownload(type: 'exe' | 'zip') {
+		if (browser) {
+			posthog.capture('sparkle_download_button', {
+				download_type: type,
+				app_version: version || 'unknown',
+				location: 'hero_section'
+			});
+		}
+
+		if (type === 'exe') {
+			window.open(
+				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`,
+				'_blank'
+			);
+		} else {
+			window.open(
+				'https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip',
+				'_blank'
+			);
+		}
+	}
 
 	function fetchVersion() {
 		fetch('https://api.github.com/repos/parcoil/sparkle/releases/latest')
@@ -149,21 +174,13 @@
 				<DropdownMenu.Content class="w-56" align="start">
 					<DropdownMenu.Group>
 						<DropdownMenu.Item
-							onSelect={() =>
-								window.open(
-									`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`,
-									'_blank'
-								)}
+							onSelect={() => handleDownload('exe')}
 						>
 							<Download class="mr-2 h-4 w-4" />
 							<span>Installer (.exe)</span>
 						</DropdownMenu.Item>
 						<DropdownMenu.Item
-							onSelect={() =>
-								window.open(
-									`https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip`,
-									'_blank'
-								)}
+							onSelect={() => handleDownload('zip')}
 						>
 							<Download class="mr-2 h-4 w-4" />
 							<span>Portable (.zip)</span>
