@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { Search, X } from '@lucide/svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
 
 	let apps = $state<any[]>([]);
 	let searchQuery = $state('');
@@ -93,7 +94,7 @@
 			</div>
 			<input
 				type="text"
-				class="block w-full rounded-lg border border-border bg-background py-3 pr-10 pl-10 text-foreground placeholder-muted-foreground focus:border-transparent focus:ring-2 focus:ring-primary focus:outline-none"
+				class="block w-full rounded-lg border border-border bg-background py-3 pr-10 pl-10 text-foreground placeholder-muted-foreground transition-all ease-in-out focus:border-transparent focus:ring-2 focus:ring-primary focus:outline-none"
 				placeholder="Search {apps.length} apps..."
 				bind:value={searchQuery}
 			/>
@@ -104,8 +105,16 @@
 			{/if}
 		</div>
 
+		<p class="text-center text-sm text-muted-foreground">
+			Request more apps <a
+				href="https://github.com/Parcoil/Sparkle/issues/new/choose"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-primary hover:underline">here</a
+			>
+		</p>
 		<div class="flex flex-wrap justify-center gap-2">
-			<button
+			<Button
 				class={`rounded-full px-4 py-2 text-sm font-medium ${
 					selectedCategory === 'all'
 						? 'bg-primary text-primary-foreground'
@@ -117,9 +126,9 @@
 				}}
 			>
 				All Apps
-			</button>
+			</Button>
 			{#each Array.from(categories).filter((cat) => cat !== 'all') as category}
-				<button
+				<Button
 					class={`rounded-full px-4 py-2 text-sm font-medium ${
 						selectedCategory === category
 							? 'bg-primary text-primary-foreground'
@@ -131,7 +140,7 @@
 					}}
 				>
 					{formatCategory(category)}
-				</button>
+				</Button>
 			{/each}
 		</div>
 	</div>
@@ -196,14 +205,14 @@
 								Install
 							</button>
 							-->
-							<a
+							<Button
 								href={app.link}
 								target="_blank"
 								rel="noopener noreferrer"
-								class="inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none"
+								class="inline-flex w-full items-center justify-center px-4 py-2 text-sm"
 							>
 								Visit Website
-							</a>
+							</Button>
 						</div>
 					</div>
 				</div>
@@ -219,16 +228,16 @@
 				Try adjusting your search or filter to find what you're looking for.
 			</p>
 			{#if searchQuery || selectedCategory !== 'all'}
-				<button
-					class="mt-4 text-sm font-medium text-primary hover:text-primary/80"
+				<Button
 					onclick={(e) => {
 						e.preventDefault();
 						searchQuery = '';
 						selectedCategory = 'all';
 					}}
+					class="mt-4"
 				>
 					Clear all filters
-				</button>
+				</Button>
 			{/if}
 		</div>
 	{/if}
