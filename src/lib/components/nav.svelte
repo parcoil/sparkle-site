@@ -5,7 +5,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { cn } from '$lib/utils';
-	import { Menu, X, Download, ChevronDown, Github } from '@lucide/svelte';
+	import { Menu, X, Download, ChevronDown, Github, ExternalLink } from '@lucide/svelte';
 	import ModeToggle from './modetoggle.svelte';
 
 	let scrolled = $state(false);
@@ -21,9 +21,8 @@
 	});
 
 	const navItems = [
-		{ name: 'Features', href: '/features' },
-		{ name: 'Docs', href: 'https://docs.getsparkle.net' },
-		{ name: 'About', href: '/about' }
+		{ name: 'Apps', href: '/apps' },
+		{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink }
 	];
 
 	let version = $state('');
@@ -39,24 +38,24 @@
 	});
 
 	function handleDownload(type: 'exe' | 'zip') {
-    if (browser) {
-      posthog.capture("sparkle_download_button", {
-        download_type: type,
-        app_version: version || "unknown",
-      });
-    }
-    
-    if (type === 'exe') {
-      window.open(
-        `https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`,
-        '_blank'
-      );
-    } else {
-      window.open(
-        'https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip',
-        '_blank'
-      );
-    }
+		if (browser) {
+			posthog.capture('sparkle_download_button', {
+				download_type: type,
+				app_version: version || 'unknown'
+			});
+		}
+
+		if (type === 'exe') {
+			window.open(
+				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`,
+				'_blank'
+			);
+		} else {
+			window.open(
+				'https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip',
+				'_blank'
+			);
+		}
 	}
 </script>
 
@@ -83,9 +82,13 @@
 				{#each navItems as item}
 					<a
 						href={item.href}
-						class="text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+						class="flex items-center text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
 					>
 						{item.name}
+						{#if item.icon}
+							{@const Icon = item.icon}
+							<Icon class="ml-2 h-4 w-4" />
+						{/if}
 					</a>
 				{/each}
 				<div class="flex items-center space-x-2">

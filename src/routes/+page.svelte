@@ -1,5 +1,9 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/button/button.svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import * as Card from '$lib/components/ui/card';
+	import { browser } from '$app/environment';
+	import posthog from 'posthog-js';
 	import {
 		Download,
 		Github,
@@ -10,12 +14,9 @@
 		Shield,
 		Package,
 		Wrench,
-		Network
+		Network,
+		ArrowRight
 	} from '@lucide/svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import * as Card from '$lib/components/ui/card';
-	import { browser } from '$app/environment';
-	import posthog from 'posthog-js';
 
 	let version = $state('');
 	let downloads = $state('');
@@ -173,15 +174,11 @@
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content class="w-56" align="start">
 					<DropdownMenu.Group>
-						<DropdownMenu.Item
-							onSelect={() => handleDownload('exe')}
-						>
+						<DropdownMenu.Item onSelect={() => handleDownload('exe')}>
 							<Download class="mr-2 h-4 w-4" />
 							<span>Installer (.exe)</span>
 						</DropdownMenu.Item>
-						<DropdownMenu.Item
-							onSelect={() => handleDownload('zip')}
-						>
+						<DropdownMenu.Item onSelect={() => handleDownload('zip')}>
 							<Download class="mr-2 h-4 w-4" />
 							<span>Portable (.zip)</span>
 						</DropdownMenu.Item>
@@ -248,6 +245,23 @@
 							</Card.Header>
 						</Card.Root>
 					{/each}
+				</div>
+			</div>
+			<div
+				class="mt-12 w-full rounded-2xl bg-muted py-12 dark:border dark:border-accent dark:bg-muted/20"
+			>
+				<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+					<div class="text-center">
+						<h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+							App Gallery
+						</h2>
+						<p class="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+							Install apps quickly with Sparkle to make your Windows experience better
+						</p>
+						<Button href="/apps" class="mt-6 inline-flex items-center px-6 py-3">
+							Browse Apps <ArrowRight class="-mr-1 ml-2 h-5 w-5" />
+						</Button>
+					</div>
 				</div>
 			</div>
 		</div>
