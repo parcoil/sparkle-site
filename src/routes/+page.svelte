@@ -131,17 +131,37 @@
 </script>
 
 <svelte:head>
-	<title>Sparkle</title>
-	<meta name="description" content="Sparkle is a free, open-source Windows optimization tool" />
+	<title>Sparkle | Ultimate Windows Optimizer & PC Performance Tool</title>
+	<meta
+		name="description"
+		content="Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download Sparkle for a faster, cleaner Windows experience."
+	/>
 	<meta
 		name="keywords"
-		content="Sparkle, Windows optimizer, debloat Windows, hone, vtrl, uninstall bloatware, optimize Windows, free tool, open source, optimization, optimizer, windows tweaks"
+		content="Windows optimizer, PC optimization, remove bloatware, speed up Windows, free PC cleaner, Windows tweaks, system optimization, gaming performance, Windows debloater, free system utility"
 	/>
-	<meta property="og:title" content="Sparkle | Ultimate Windows Optimizer" />
-	<meta property="og:description" content="Optimize your Windows PC, remove bloatware" />
-	<meta property="og:url" content="https://getsparkle.net/" />
+
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content="https://getsparkle.net/assets/sparklelogo.png" />
+	<meta property="og:url" content="https://getsparkle.net/" />
+	<meta property="og:title" content="Sparkle | Ultimate Windows Optimizer" />
+	<meta
+		property="og:description"
+		content="Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download now for a faster, cleaner Windows experience."
+	/>
+	<meta property="og:image" content="/sparklelogo.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Sparkle - Ultimate Windows Optimizer" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Sparkle | Ultimate Windows Optimizer" />
+	<meta
+		name="twitter:description"
+		content="Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download now!"
+	/>
+	<meta name="twitter:image" content="/sparklelogo.png" />
+
+	<link rel="canonical" href="https://getsparkle.net/" />
 </svelte:head>
 
 <div class="mt-10 flex min-h-screen flex-col items-center justify-center p-25">
