@@ -3,7 +3,7 @@
 	import favicon from '$lib/assets/sparklelogo.png';
 	import { ModeWatcher } from 'mode-watcher';
 	import Nav from '$lib/components/nav.svelte';
-
+	import Footer from '$lib/components/footer.svelte';
 	let { children } = $props();
 </script>
 
@@ -14,3 +14,4 @@
 <ModeWatcher />
 <Nav />
 {@render children?.()}
+<Footer />

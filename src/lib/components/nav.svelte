@@ -3,7 +3,7 @@
   import { Button } from '$lib/components/ui/button';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import { cn } from '$lib/utils';
-  import { Menu, X, Download, ChevronDown } from '@lucide/svelte';
+  import { Menu, X, Download, ChevronDown, Github } from '@lucide/svelte';
   import ModeToggle from './modetoggle.svelte';
 
   let scrolled = $state(false);
@@ -73,6 +73,15 @@
           </a>
         {/each}
         <div class="flex items-center space-x-2">
+          <a 
+            href="https://github.com/Parcoil/Sparkle" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center p-2 rounded-md text-foreground/70 hover:bg-accent hover:text-foreground transition-colors"
+            aria-label="GitHub repository"
+          >
+            <Github class="h-5 w-5" />
+          </a>
           <ModeToggle />
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
@@ -128,6 +137,18 @@
           </a>
         {/each}
         <div class="px-3 py-2 space-y-2">
+          <div class="flex justify-between items-center px-3 py-2">
+            <span class="text-sm font-medium">GitHub</span>
+            <a 
+              href="https://github.com/Parcoil/Sparkle" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center p-2 rounded-md text-foreground/70 hover:bg-accent hover:text-foreground transition-colors"
+              aria-label="GitHub repository"
+            >
+              <Github class="h-5 w-5" />
+            </a>
+          </div>
           <div class="flex justify-between items-center px-3 py-2">
             <span class="text-sm font-medium">Theme</span>
             <ModeToggle />

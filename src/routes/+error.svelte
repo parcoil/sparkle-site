@@ -33,7 +33,7 @@
 	<title>Sparkle - 404</title>
 </svelte:head>
 
-<div class="flex min-h-screen flex-col items-center justify-center p-8">
+<div class="flex min-h-[calc(100vh-3.3rem)] flex-col items-center justify-center p-8">
 	<div class="flex w-full max-w-2xl flex-col items-center justify-center">
 		<img
 			src="/sparklelogo.png"
