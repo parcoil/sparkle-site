@@ -1,38 +1,12 @@
-# sv
+<div align="center">
+    <img src="https://raw.githubusercontent.com/Parcoil/Sparkle/v2/resources/sparklelogo.png" alt="Sparkle Logo" width="100" height="100">
+    <h1>Sparkle Site</h1>
+    <p>this is the source code for the Sparkle website <a href="https://getsparkle.net">getsparkle.net</a></p>
+    <p>built with <a href="https://svelte.dev">svelte</a> and <a href="https://tailwindcss.com">tailwindcss</a></p>
+</div>
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+> [!NOTE]  
+> Looking to donwload Sparkle? Head to <a href="https://getsparkle.net">getsparkle.net</a>.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+> [!TIP]  
+> If you are looking to contribute to Sparkle, check out the <a href="https://github.com/Parcoil/Sparkle">Sparkle GitHub repository</a>.

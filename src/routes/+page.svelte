@@ -120,12 +120,12 @@
 
 <div class="mt-10 flex min-h-screen flex-col items-center justify-center p-25">
 	<div class="flex w-full max-w-5xl flex-col items-center justify-center">
-		<img
-			src="/sparklelogo.png"
-			alt="Sparkle Logo"
-			class="mb-6 h-24 w-24 animate-bounce duration-900"
-		/>
-		<h1 class="mb-4 text-5xl font-bold">Sparkle</h1>
+		<img src="/sparklelogo.png" alt="Sparkle Logo" class="mb-6 h-24 w-24" />
+		<h1
+			class="animate-gradient mb-4 bg-gradient-to-r from-[#0096ff] to-[#0042ff] bg-clip-text text-5xl font-bold text-transparent md:text-7xl"
+		>
+			Sparkle
+		</h1>
 		<p class="mb-6 text-lg text-muted-foreground">
 			The ultimate tool to optimize Windows and boost gaming performance
 		</p>
@@ -182,7 +182,7 @@
 		<img
 			src="https://raw.githubusercontent.com/Parcoil/Sparkle/refs/heads/v2/images/appshowcase.png"
 			alt="Sparkle Logo"
-			class="mt-6 aspect-video w-[800px] rounded-md border-2 border-accent transition-all duration-300 hover:scale-105"
+			class="mt-6 aspect-video w-[800px] rounded-md border-2 border-primary transition-all duration-300 hover:scale-105 dark:border-accent"
 		/>
 
 		<div class="w-full py-12">
