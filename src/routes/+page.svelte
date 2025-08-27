@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/button/button.svelte';
-	import { Download, Github } from '@lucide/svelte';
-	let version = $state('v2.6.0');
+	import { Download, Github, ChevronDown } from '@lucide/svelte';
+    import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	let version = $state('');
 	let downloads = $state('');
 
 	function fetchVersion() {
@@ -53,8 +54,33 @@
 			<p class="text-sm font-medium text-muted-foreground">Downloads <span class="font-semibold text-primary">{downloads}</span></p>
 		</div>
 		<div class="flex space-x-4">
-			<Button size="lg"><Download />Download</Button>
-			<Button variant="outline" size="lg"><Github />View on GitHub</Button>
+			<DropdownMenu.Root>
+				<DropdownMenu.Trigger asChild>
+					<Button size="lg">
+						<Download class="mr-2 h-4 w-4" />
+						Download
+						<ChevronDown class="ml-2 h-4 w-4 opacity-50" />
+					</Button>
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content class="w-56" align="start">
+					<DropdownMenu.Group>
+						<DropdownMenu.Item onSelect={() => window.open(`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`, '_blank')}>
+							<Download class="mr-2 h-4 w-4" />
+							<span>Installer (.exe)</span>
+						</DropdownMenu.Item>
+						<DropdownMenu.Item onSelect={() => window.open(`https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip`, '_blank')}>
+							<Download class="mr-2 h-4 w-4" />
+							<span>Portable (.zip)</span>
+						</DropdownMenu.Item>
+					</DropdownMenu.Group>
+				</DropdownMenu.Content>
+			</DropdownMenu.Root>
+			<a href="https://github.com/Parcoil/Sparkle">
+				<Button variant="outline" size="lg">
+					<Github class="mr-2 h-4 w-4" />
+					View on GitHub
+				</Button>
+			</a>
 		</div>
 
 		<img src="https://raw.githubusercontent.com/Parcoil/Sparkle/refs/heads/v2/images/appshowcase.png" alt="Sparkle Logo" class="w-full mt-6 rounded-md hover:scale-105 transition-all duration-300">
