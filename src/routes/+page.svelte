@@ -1,25 +1,39 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import * as Card from '$lib/components/ui/card';
-	import { browser } from '$app/environment';
-	import posthog from 'posthog-js';
+	import { onMount } from 'svelte';
 	import {
 		Download,
+		Shield,
 		Github,
+		Network,
 		ChevronDown,
 		Star,
 		Zap,
 		Trash2,
-		Shield,
 		Package,
 		Wrench,
-		Network,
 		ArrowRight
 	} from '@lucide/svelte';
+	import { Button } from '$lib/components/ui/button';
+	import * as Card from '$lib/components/ui/card';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { Alert, AlertTitle } from '$lib/components/ui/alert';
+	import { page } from '$app/stores';
+	import posthog from 'posthog-js';
+	import { browser } from '$app/environment';
 
-	let version = $state('');
-	let downloads = $state('');
+	let showMovedAlert = false;
+
+	onMount(() => {
+		if (browser) {
+			const params = new URLSearchParams(window.location.search);
+			if (params.get('ref') === 'parcoil-sparkle-page') {
+				showMovedAlert = true;
+			}
+		}
+	});
+
+	let version = '';
+	let downloads = '';
 
 	function handleDownload(type: 'exe' | 'zip') {
 		if (browser) {
@@ -131,7 +145,7 @@
 </script>
 
 <svelte:head>
-	<title>Sparkle | Ultimate Windows Optimizer & PC Performance Tool</title>
+	<title>Sparkle | Ultimate Windows Optimizer</title>
 	<meta
 		name="description"
 		content="Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download Sparkle for a faster, cleaner Windows experience."
@@ -166,6 +180,13 @@
 
 <div class="mt-10 flex min-h-screen flex-col items-center justify-center p-25">
 	<div class="flex w-full max-w-5xl flex-col items-center justify-center">
+		{#if $page.url.searchParams.get('ref') === 'parcoil-sparkle-page'}
+			<div class="mb-6 w-full max-w-md">
+				<Alert class="text-center">
+					<AlertTitle>Hello Parcoil user, Sparkle has moved to getsparkle.net</AlertTitle>
+				</Alert>
+			</div>
+		{/if}
 		<img src="/sparklelogo.png" alt="Sparkle Logo" class="mb-6 h-24 w-24" />
 		<h1
 			class="animate-gradient mb-4 bg-gradient-to-r from-[#0096ff] to-[#0042ff] bg-clip-text text-5xl font-bold text-transparent md:text-7xl"
