@@ -23,6 +23,7 @@
 	const navItems = [
 		{ name: 'Apps', href: '/apps' },
 		{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink },
+		{ name: 'Discord', href: 'https://discord.gg/En5YJYWj3Z', icon: ExternalLink },
 		{ name: 'Parcoil Site', href: 'https://parcoil.com', icon: ExternalLink }
 	];
 

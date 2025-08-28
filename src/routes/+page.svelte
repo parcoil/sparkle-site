@@ -14,10 +14,11 @@
 		Wrench,
 		ArrowRight
 	} from '@lucide/svelte';
-	import { Button } from '$lib/components/ui/button';
+	import { Button, Root } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { Alert, AlertTitle } from '$lib/components/ui/alert';
+	import * as Accordion from '$lib/components/ui/accordion';
 	import { page } from '$app/stores';
 	import posthog from 'posthog-js';
 	import { browser } from '$app/environment';
@@ -89,6 +90,37 @@
 		fetchVersion();
 		fetchDownloads();
 	});
+
+	const faqs = [
+		{
+			question: 'Is Sparkle safe to use?',
+			answer:
+				'Yes! Sparkle only makes reversible changes. You can create system restore points before applying any tweaks.'
+		},
+		{
+			question: 'Which versions of Windows are supported?',
+			answer: 'Sparkle supports Windows 10 and 11.'
+		},
+		{
+			question: 'Can I undo changes made by Sparkle?',
+			answer:
+				'Yes, all tweaks are reversible. You can either use Sparkle’s built-in restore option or a system restore point.'
+		},
+		{
+			question: 'Do I need an internet connection to use Sparkle?',
+			answer:
+				'The auto-updates require an internet connection. Most other features should work offline.'
+		},
+		{
+			question: 'How often is Sparkle updated?',
+			answer:
+				'Sparkle is actively maintained, with new features, versions and bug fixes released regularly. Check GitHub or here for the latest version.'
+		},
+		{
+			question: 'What should I do if I encounter an error?',
+			answer: 'Visit our GitHub Issues page to report bugs or join our Discord server for support.'
+		}
+	];
 
 	const features = [
 		{
@@ -326,7 +358,26 @@
 					{/each}
 				</div>
 			</div>
-
+			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+				<div class="text-center">
+					<h2 class="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">FAQs</h2>
+					<p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
+						Frequently Asked Questions
+					</p>
+				</div>
+				<Accordion.Root type="single" class="mt-6 space-y-2">
+					{#each faqs as faq}
+						<Accordion.Item value={faq.question}>
+							<Accordion.Trigger class="flex justify-between">
+								{faq.question}
+							</Accordion.Trigger>
+							<Accordion.Content class="text-muted-foreground">
+								{faq.answer}
+							</Accordion.Content>
+						</Accordion.Item>
+					{/each}
+				</Accordion.Root>
+			</div>
 			<div
 				class="mt-12 w-full rounded-2xl bg-muted py-12 dark:border dark:border-accent dark:bg-muted/20"
 			>
