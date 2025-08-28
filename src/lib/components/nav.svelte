@@ -22,7 +22,8 @@
 
 	const navItems = [
 		{ name: 'Apps', href: '/apps' },
-		{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink }
+		{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink },
+		{ name: 'Parcoil Site', href: 'https://parcoil.com', icon: ExternalLink }
 	];
 
 	let version = $state('');
@@ -171,14 +172,7 @@
 						<span class="text-sm font-medium">Theme</span>
 						<ModeToggle />
 					</div>
-					<Button variant="default" class="w-full" onclick={() => handleDownload('exe')}>
-						<Download class="mr-2 h-4 w-4" />
-						Installer (.exe)
-					</Button>
-					<Button variant="outline" class="w-full" onclick={() => handleDownload('zip')}>
-						<Download class="mr-2 h-4 w-4" />
-						Portable (.zip)
-					</Button>
+					<p class="text-center text-sm text-primary">Vist on desktop to download Sparkle</p>
 				</div>
 			</div>
 		</div>

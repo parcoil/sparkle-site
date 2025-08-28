@@ -85,8 +85,10 @@
 		downloads = totalDownloads.toLocaleString('en-US');
 	}
 
-	fetchVersion();
-	fetchDownloads();
+	onMount(() => {
+		fetchVersion();
+		fetchDownloads();
+	});
 
 	const features = [
 		{
@@ -180,7 +182,7 @@
 	<link rel="canonical" href="https://getsparkle.net/" />
 </svelte:head>
 
-<div class="mt-10 flex min-h-screen flex-col items-center justify-center p-25">
+<div class="mt-10 flex min-h-screen flex-col items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
 	<div class="flex w-full max-w-5xl flex-col items-center justify-center">
 		{#if $page.url.searchParams.get('ref') === 'parcoil-sparkle-page'}
 			<div class="mb-6 w-full max-w-md">
@@ -189,17 +191,22 @@
 				</Alert>
 			</div>
 		{/if}
-		<img src="/sparklelogo.png" alt="Sparkle Logo" class="mb-6 h-24 w-24" />
+
+		<img src="/sparklelogo.png" alt="Sparkle Logo" class="mb-6 h-20 w-20 sm:h-24 sm:w-24" />
+
 		<h1
-			class="animate-gradient mb-4 bg-gradient-to-r from-[#0096ff] to-[#0042ff] bg-clip-text text-5xl font-bold text-transparent md:text-7xl"
+			class="animate-gradient mb-4 bg-gradient-to-r from-[#0096ff] to-[#0042ff] bg-clip-text text-center text-4xl font-bold text-transparent sm:text-5xl md:text-7xl"
 		>
 			Sparkle
 		</h1>
-		<p class="mb-6 text-lg text-muted-foreground">
+
+		<p class="mb-6 text-center text-base text-muted-foreground sm:text-lg">
 			The ultimate tool to optimize Windows and boost gaming performance
 		</p>
 
-		<div class="mb-6 flex items-center justify-center space-x-4">
+		<div
+			class="mb-6 flex flex-col space-y-2 text-center sm:flex-row sm:space-y-0 sm:space-x-4 sm:text-left"
+		>
 			<p class="text-sm font-medium text-muted-foreground">
 				Latest Version <span class="font-semibold text-primary">{version}</span>
 			</p>
@@ -208,16 +215,18 @@
 			</p>
 		</div>
 
-		<div class="flex space-x-4">
+		<div
+			class="hidden w-full flex-col justify-center space-y-2 sm:flex sm:w-auto sm:flex-row sm:space-y-0 sm:space-x-4"
+		>
 			<DropdownMenu.Root>
-				<DropdownMenu.Trigger>
-					<Button size="lg">
+				<DropdownMenu.Trigger class="w-full sm:w-auto">
+					<Button size="lg" class="w-full justify-center sm:w-auto">
 						<Download class="mr-2 h-4 w-4" />
 						Download
 						<ChevronDown class="ml-2 h-4 w-4 opacity-50" />
 					</Button>
 				</DropdownMenu.Trigger>
-				<DropdownMenu.Content class="w-56" align="start">
+				<DropdownMenu.Content class="w-full sm:w-56" align="start">
 					<DropdownMenu.Group>
 						<DropdownMenu.Item onSelect={() => handleDownload('exe')}>
 							<Download class="mr-2 h-4 w-4" />
@@ -230,17 +239,18 @@
 					</DropdownMenu.Group>
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
-			<a href="https://github.com/Parcoil/Sparkle">
-				<Button variant="outline" size="lg">
+			<a href="https://github.com/Parcoil/Sparkle" class="w-full sm:w-auto">
+				<Button variant="outline" size="lg" class="w-full justify-center sm:w-auto">
 					<Github class="mr-2 h-4 w-4" />
 					View on GitHub
 				</Button>
 			</a>
 		</div>
-		<div class="group relative mt-6 max-w-2xl">
+
+		<div class="group relative mt-4 hidden w-full sm:mt-6 sm:flex sm:max-w-md">
 			<button
-				class="flex items-center gap-2 rounded-md bg-muted px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted/80"
-				on:click={(e) => {
+				class="flex w-full items-center gap-2 rounded-md bg-muted px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted/80"
+				on:click={() => {
 					const command = 'irm https://getsparkle.net/get | iex';
 					navigator.clipboard.writeText(command);
 					toast.success('Copied to clipboard');
@@ -255,17 +265,24 @@
 				Click to copy PowerShell command
 			</span>
 		</div>
+		<div
+			class="mt-4 flex flex-col items-center justify-center space-y-2 px-4 text-center sm:hidden"
+		>
+			<p class="text-sm font-semibold text-primary">
+				Please visit this page on a Windows PC to download Sparkle
+			</p>
+		</div>
 		<img
 			src="https://raw.githubusercontent.com/Parcoil/Sparkle/refs/heads/v2/images/appshowcase.png"
 			alt="Sparkle Logo"
-			class="mt-6 aspect-video w-[800px] rounded-md border-2 border-primary transition-all duration-300 hover:scale-105 dark:border-accent"
+			class="mt-6 aspect-video w-full max-w-full rounded-md border-2 border-primary transition-all duration-300 hover:scale-105 sm:max-w-[800px] dark:border-accent"
 		/>
 
 		<div class="w-full py-12">
 			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div class="text-center">
-					<h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Features</h2>
-					<p class="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+					<h2 class="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">Features</h2>
+					<p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
 						Powerful Tweaks to optimize your Windows experience
 					</p>
 				</div>
@@ -309,18 +326,22 @@
 					{/each}
 				</div>
 			</div>
+
 			<div
 				class="mt-12 w-full rounded-2xl bg-muted py-12 dark:border dark:border-accent dark:bg-muted/20"
 			>
 				<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					<div class="text-center">
-						<h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+						<h2 class="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
 							App Gallery
 						</h2>
-						<p class="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+						<p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
 							Install apps quickly with Sparkle to make your Windows experience better
 						</p>
-						<Button href="/apps" class="mt-6 inline-flex items-center px-6 py-3">
+						<Button
+							href="/apps"
+							class="mt-6 inline-flex w-full items-center justify-center px-6 py-3 sm:w-auto"
+						>
 							Browse Apps <ArrowRight class="-mr-1 ml-2 h-5 w-5" />
 						</Button>
 					</div>
