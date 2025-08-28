@@ -23,7 +23,6 @@
 		src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565760898646999"
 		crossorigin="anonymous"
 	></script>
-	<meta property="og:title" content="Sparkle | Ultimate Windows Optimizer" />
 	<meta
 		property="og:description"
 		content="Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download now for a faster, cleaner Windows experience."
@@ -41,7 +40,6 @@
 	/>
 	<meta name="twitter:image" content="/sparklelogo.png" />
 
-	<link rel="canonical" href="https://getsparkle.net/" />
 	<meta
 		name="description"
 		content="Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download Sparkle for a faster, cleaner Windows experience."
