@@ -63,7 +63,7 @@
 
 <header
 	class={cn(
-		'fixed top-0 z-50 w-full transition-all duration-300',
+		'fixed top-0 z-50 w-full transition-all duration-300 min-w-screen',
 		scrolled ? 'border-b bg-background/80 backdrop-blur-md' : 'bg-transparent'
 	)}
 >

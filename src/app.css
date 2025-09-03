@@ -162,3 +162,14 @@
 		@apply bg-background text-foreground;
 	}
 }
+* {
+	scrollbar-color: var(--color-primary) transparent;
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+
+html,body,:root {
+    height: 100%;
+}
