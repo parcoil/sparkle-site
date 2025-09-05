@@ -169,3 +169,6 @@
     @apply bg-background text-foreground;
   }
 }
+* {
+  scrollbar-color: var(--color-primary) transparent;
+}

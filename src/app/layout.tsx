@@ -5,22 +5,22 @@ import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/navbar";
 import Footer from "@/components/footer";
 
-import { Poppins, Fira_Code } from 'next/font/google';
+import { Poppins, Fira_Code } from "next/font/google";
 
 const poppins = Poppins({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
 });
 
 const firaCode = Fira_Code({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-fira-code',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-fira-code",
 });
 export const metadata: Metadata = {
-  title: "Sparkle | Ultimate Windows Optimizer",
+  title: "Sparkle - Windows Optimizer",
   description:
     "Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download Sparkle for a faster, cleaner Windows experience.",
   keywords: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://getsparkle.net/",
-    title: "Sparkle | Ultimate Windows Optimizer",
+    title: "Sparkle - Windows Optimizer",
     description:
       "Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download now for a faster, cleaner Windows experience.",
     images: [
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sparkle | Ultimate Windows Optimizer",
+    title: "Sparkle - Windows Optimizer",
     description:
       "Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download now!",
     images: ["/sparklelogo.png"],

@@ -195,7 +195,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Sparkle | Ultimate Windows Optimizer</title>
+        <title>Sparkle - Windows Optimizer</title>
       </Head>
 
       <main className="mt-10 flex min-h-screen flex-col items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
