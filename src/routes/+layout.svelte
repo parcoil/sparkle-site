@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.css';
-	import favicon from '$lib/assets/sparklelogo.png';
 	import { ModeWatcher } from 'mode-watcher';
 	import Nav from '$lib/components/nav.svelte';
 	import Footer from '$lib/components/footer.svelte';
@@ -17,7 +16,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/sparklelogo.png" />
 	<script
 		async
 		src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565760898646999"
