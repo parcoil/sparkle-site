@@ -1,4 +1,4 @@
-// app/api/get-powershell/route.ts
+export const runtime = "edge";
 export const GET = async () => {
   const url = "https://raw.githubusercontent.com/Parcoil/Sparkle/v2/get.ps1";
   const res = await fetch(url);
@@ -7,10 +7,8 @@ export const GET = async () => {
     return new Response("File not found", { status: 404 });
   }
 
-  // Fetch the file as text
   const text = await res.text();
 
-  // Encode with UTF-8 BOM for proper ASCII/emojis
   const encoder = new TextEncoder();
   const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
   const encoded = encoder.encode(text);
