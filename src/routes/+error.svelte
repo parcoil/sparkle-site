@@ -22,7 +22,7 @@
 			);
 		} else {
 			window.open(
-				'https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip',
+				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-win.zip`,
 				'_blank'
 			);
 		}
