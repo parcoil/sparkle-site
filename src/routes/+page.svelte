@@ -318,7 +318,23 @@
 						Powerful Tweaks to optimize your Windows experience
 					</p>
 				</div>
-
+				<script
+					async
+					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565760898646999"
+					crossorigin="anonymous"
+				></script>
+				<!-- sparkle hz -->
+				<ins
+					class="adsbygoogle"
+					style="display:block"
+					data-ad-client="ca-pub-1565760898646999"
+					data-ad-slot="3836598101"
+					data-ad-format="auto"
+					data-full-width-responsive="true"
+				></ins>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
 				<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 					{#each features as feature}
 						<Card.Root
@@ -358,6 +374,23 @@
 					{/each}
 				</div>
 			</div>
+			<script
+				async
+				src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565760898646999"
+				crossorigin="anonymous"
+			></script>
+			<!-- sparkle hz -->
+			<ins
+				class="adsbygoogle"
+				style="display:block"
+				data-ad-client="ca-pub-1565760898646999"
+				data-ad-slot="3836598101"
+				data-ad-format="auto"
+				data-full-width-responsive="true"
+			></ins>
+			<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
 			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div class="text-center">
 					<h2 class="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">FAQs</h2>
@@ -398,6 +431,23 @@
 					</div>
 				</div>
 			</div>
+			<script
+				async
+				src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565760898646999"
+				crossorigin="anonymous"
+			></script>
+			<!-- sparkle hz -->
+			<ins
+				class="adsbygoogle"
+				style="display:block"
+				data-ad-client="ca-pub-1565760898646999"
+				data-ad-slot="3836598101"
+				data-ad-format="auto"
+				data-full-width-responsive="true"
+			></ins>
+			<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
 		</div>
 	</div>
 </div>

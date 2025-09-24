@@ -35,5 +35,22 @@
 <div class="min-h-screen bg-background">
 	<div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
 		<AppGallery />
+		<script
+			async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565760898646999"
+			crossorigin="anonymous"
+		></script>
+		<!-- sparkle hz -->
+		<ins
+			class="adsbygoogle"
+			style="display:block"
+			data-ad-client="ca-pub-1565760898646999"
+			data-ad-slot="3836598101"
+			data-ad-format="auto"
+			data-full-width-responsive="true"
+		></ins>
+		<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
 	</div>
 </div>
