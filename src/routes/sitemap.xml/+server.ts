@@ -1,8 +1,9 @@
 export async function GET() {
-	const baseUrl = 'https://getsparkle.net'; // replace with your actual domain
+	const baseUrl = 'https://getsparkle.net';
 
 	const urls = [
 		{ path: '', priority: 1.0 },
+		{ path: 'debloat', priority: 0.8 },
 		{ path: 'apps', priority: 0.8 }
 	];
 

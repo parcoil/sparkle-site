@@ -24,7 +24,7 @@
 	import { browser } from '$app/environment';
 	import { toast } from 'svelte-sonner';
 
-	let showMovedAlert = false;
+	let showMovedAlert = $state(false);
 
 	onMount(() => {
 		if (browser) {
@@ -35,8 +35,8 @@
 		}
 	});
 
-	let version = '';
-	let downloads = '';
+	let version = $state('');
+	let downloads = $state('');
 
 	function handleDownload(type: 'exe' | 'zip') {
 		if (browser) {
@@ -125,6 +125,7 @@
 	const features = [
 		{
 			title: 'Debloat Windows',
+			updated: true,
 			description:
 				'Removes unnecessary Windows features and apps to free up resources and improve performance.',
 			icon: Star,
@@ -174,7 +175,7 @@
 			description: 'Optimize your network settings and change DNS for improved speed and security.',
 			icon: Network,
 			iconColor: 'text-purple-500',
-			new: true,
+			new: false,
 			categories: ['Performance', 'Networking']
 		}
 	];
@@ -217,7 +218,7 @@
 <div class="mt-10 flex min-h-screen flex-col items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
 	<div class="flex w-full max-w-5xl flex-col items-center justify-center">
 		{#if $page.url.searchParams.get('ref') === 'parcoil-sparkle-page'}
-			<div class="mb-6 w-full max-w-md">
+			<div class="mb-6 w-full max-w-md mt-4">
 				<Alert class="text-center">
 					<AlertTitle>Hello Parcoil user, Sparkle has moved to getsparkle.net</AlertTitle>
 				</Alert>
@@ -282,7 +283,7 @@
 		<div class="group relative mt-4 hidden w-full sm:mt-6 sm:flex sm:max-w-md">
 			<button
 				class="flex w-full items-center gap-2 rounded-md bg-muted px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted/80"
-				on:click={() => {
+				onclick={() => {
 					const command = 'irm https://getsparkle.net/get | iex';
 					navigator.clipboard.writeText(command);
 					toast.success('Copied to clipboard');
@@ -356,6 +357,13 @@
 											New
 										</span>
 									{/if}
+									{#if feature.updated}
+									<span
+										class="rounded-full bg-teal-100 px-2 py-0.5 text-xs font-medium text-teal-800"
+									>
+										Updated
+									</span>
+								{/if}
 								</div>
 								<Card.Description class="mt-2 text-muted-foreground">
 									{feature.description}

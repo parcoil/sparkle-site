@@ -5,8 +5,19 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { cn } from '$lib/utils';
-	import { Menu, X, Download, ChevronDown, Github, ExternalLink } from '@lucide/svelte';
+	import {
+		Menu,
+		X,
+		Download,
+		ChevronDown,
+		Github,
+		ExternalLink,
+		Trash2,
+		Grid2X2,
+		Home
+	} from '@lucide/svelte';
 	import ModeToggle from './modetoggle.svelte';
+	import Discord from './Discord.svelte';
 
 	let scrolled = $state(false);
 	let mobileMenuOpen = $state(false);
@@ -21,10 +32,10 @@
 	});
 
 	const navItems = [
-		{ name: 'Apps', href: '/apps' },
-		{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink },
-		{ name: 'Discord', href: 'https://discord.gg/En5YJYWj3Z', icon: ExternalLink },
-		{ name: 'Parcoil Site', href: 'https://parcoil.com', icon: ExternalLink }
+		{ name: 'Home', href: '/', icon: Home },
+		{ name: 'Debloat Script', href: '/debloat', icon: Trash2 },
+		{ name: 'Apps', href: '/apps', icon: Grid2X2 },
+		{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink }
 	];
 
 	let version = $state('');
@@ -63,7 +74,7 @@
 
 <header
 	class={cn(
-		'fixed top-0 z-50 w-full transition-all duration-300 min-w-screen',
+		'fixed top-0 z-50 w-full min-w-screen transition-all duration-300',
 		scrolled ? 'border-b bg-background/80 backdrop-blur-md' : 'bg-transparent'
 	)}
 >
@@ -86,14 +97,23 @@
 						href={item.href}
 						class="flex items-center text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
 					>
-						{item.name}
 						{#if item.icon}
 							{@const Icon = item.icon}
-							<Icon class="ml-2 h-4 w-4" />
+							<Icon class="mr-2 h-4 w-4" />
 						{/if}
+						{item.name}
 					</a>
 				{/each}
 				<div class="flex items-center space-x-2">
+					<a
+						href="https://dsc.gg/parcoil"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+						aria-label="Discord Server"
+					>
+						<Discord class="h-5 w-5" />
+					</a>
 					<a
 						href="https://github.com/Parcoil/Sparkle"
 						target="_blank"
