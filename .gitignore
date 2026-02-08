@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.commit.json
+components/commit.tsx
+components/commit.tsx
