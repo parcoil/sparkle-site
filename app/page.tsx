@@ -25,13 +25,14 @@ import {
 	DropdownMenuItem
 } from '@/components/ui/dropdown-menu';
 import { Alert, AlertTitle } from '@/components/ui/alert';
+import { Toaster, toast } from 'sonner';
+import Script from 'next/script';
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent
 } from '@/components/ui/accordion';
-import { toast } from 'sonner';
 
 const faqs = [
 	{
@@ -191,11 +192,12 @@ export default function Home() {
 
 	return (
 		<>
-			<script
+			<Script
 				async
 				src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565760898646999"
 				crossOrigin="anonymous"
-			></script>
+				strategy="beforeInteractive"
+			/>
 			<div className="mt-10 flex min-h-screen flex-col items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
 				<div className="flex w-full max-w-5xl flex-col items-center justify-center">
 					{searchParams?.get('ref') === 'parcoil-sparkle-page' && (
@@ -333,6 +335,20 @@ export default function Home() {
 								))}
 							</div>
 						</div>
+						<ins
+							className="adsbygoogle"
+							style={{ display: 'block' }}
+							data-ad-client="ca-pub-1565760898646999"
+							data-ad-slot="3836598101"
+							data-ad-format="auto"
+							data-full-width-responsive="true"
+						></ins>
+						<Script
+							strategy="afterInteractive"
+							dangerouslySetInnerHTML={{
+								__html: '(adsbygoogle = window.adsbygoogle || []).push({});'
+							}}
+						/>
 						<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 							<div className="text-center">
 								<h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -353,6 +369,20 @@ export default function Home() {
 								))}
 							</Accordion>
 						</div>
+						<ins
+							className="adsbygoogle"
+							style={{ display: 'block' }}
+							data-ad-client="ca-pub-1565760898646999"
+							data-ad-slot="3836598101"
+							data-ad-format="auto"
+							data-full-width-responsive="true"
+						></ins>
+						<Script
+							strategy="afterInteractive"
+							dangerouslySetInnerHTML={{
+								__html: '(adsbygoogle = window.adsbygoogle || []).push({});'
+							}}
+						/>
 						<div className="mt-12 w-full rounded-2xl bg-muted py-12 dark:border dark:border-accent dark:bg-muted/20">
 							<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 								<div className="text-center">
@@ -373,6 +403,20 @@ export default function Home() {
 								</div>
 							</div>
 						</div>
+						<ins
+							className="adsbygoogle"
+							style={{ display: 'block' }}
+							data-ad-client="ca-pub-1565760898646999"
+							data-ad-slot="3836598101"
+							data-ad-format="auto"
+							data-full-width-responsive="true"
+						></ins>
+						<Script
+							strategy="afterInteractive"
+							dangerouslySetInnerHTML={{
+								__html: '(adsbygoogle = window.adsbygoogle || []).push({});'
+							}}
+						/>
 					</div>
 				</div>
 			</div>
