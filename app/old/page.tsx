@@ -30,14 +30,14 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Toaster, toast } from "sonner";
+import Script from "next/script";
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { Toaster, toast } from "sonner";
-import Script from "next/script";
 
 const faqs = [
   {
@@ -203,16 +203,16 @@ export default function Home() {
 
   return (
     <>
-      <Toaster />
-      <script
+      <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565760898646999"
         crossOrigin="anonymous"
-      ></script>
+        strategy="beforeInteractive"
+      />
       <div className="mt-10 flex min-h-screen flex-col items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex w-full max-w-5xl flex-col items-center justify-center">
           {searchParams?.get("ref") === "parcoil-sparkle-page" && (
-            <div className="mb-6 w-full max-w-md mt-4">
+            <div className="mt-4 mb-6 w-full max-w-md">
               <Alert className="text-center">
                 <AlertTitle>
                   Hello Parcoil user, Sparkle has moved to getsparkle.net
@@ -227,7 +227,7 @@ export default function Home() {
             className="mb-6 h-20 w-20 sm:h-24 sm:w-24"
           />
 
-          <h1 className="animate-gradient mb-4 bg-gradient-to-r from-[#0096ff] to-[#0042ff] bg-clip-text text-center text-4xl font-bold text-transparent sm:text-5xl md:text-7xl">
+          <h1 className="animate-gradient mb-4 bg-linear-to-r from-[#0096ff] to-[#0042ff] bg-clip-text text-center text-4xl font-bold text-transparent sm:text-5xl md:text-7xl">
             Sparkle
           </h1>
 
@@ -304,7 +304,7 @@ export default function Home() {
           <img
             src="https://raw.githubusercontent.com/Parcoil/Sparkle/refs/heads/v2/images/appshowcase.png"
             alt="Sparkle Logo"
-            className="mt-6 aspect-video w-full max-w-full rounded-md border-2 border-primary transition-all duration-300 hover:scale-105 sm:max-w-[800px] dark:border-accent"
+            className="mt-6 aspect-video w-full max-w-full rounded-md border-2 border-primary transition-all duration-300 hover:scale-105 sm:max-w-200 dark:border-accent"
           />
 
           <div className="w-full py-12">
@@ -371,6 +371,7 @@ export default function Home() {
               data-full-width-responsive="true"
             ></ins>
             <Script
+              strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: "(adsbygoogle = window.adsbygoogle || []).push({});",
               }}
@@ -384,7 +385,7 @@ export default function Home() {
                   Frequently Asked Questions
                 </p>
               </div>
-              <Accordion type="single" className="mt-6 space-y-2">
+              <Accordion type="single" className="mt-6 space-y-2" collapsible>
                 {faqs.map((faq) => (
                   <AccordionItem key={faq.question} value={faq.question}>
                     <AccordionTrigger>{faq.question}</AccordionTrigger>
@@ -403,7 +404,8 @@ export default function Home() {
               data-ad-format="auto"
               data-full-width-responsive="true"
             ></ins>
-            <script
+            <Script
+              strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: "(adsbygoogle = window.adsbygoogle || []).push({});",
               }}
@@ -437,7 +439,8 @@ export default function Home() {
               data-ad-format="auto"
               data-full-width-responsive="true"
             ></ins>
-            <script
+            <Script
+              strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: "(adsbygoogle = window.adsbygoogle || []).push({});",
               }}
