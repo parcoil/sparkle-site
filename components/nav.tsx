@@ -11,7 +11,9 @@ import {
 	ExternalLink,
 	Trash2,
 	Grid2X2,
-	Home
+	Home,
+	Code,
+	Wrench
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -27,6 +29,8 @@ import { ModeToggle } from './mode-toggle';
 
 const navItems = [
 	{ name: 'Home', href: '/', icon: Home },
+	{ name: 'Script Builder', href: '/script-builder', icon: Code },
+	{ name: 'Tweaks', href: '/tweaks', icon: Wrench },
 	{ name: 'Debloat Script', href: '/debloat', icon: Trash2 },
 	{ name: 'Apps', href: '/apps', icon: Grid2X2 },
 	{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink }
