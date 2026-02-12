@@ -265,7 +265,7 @@ export default function Home() {
     {
       label: "Chocolatey",
       value: "chocolatey",
-      code: "choco install sparkle --version=2.12.0",
+      code: "choco install sparkle --version=2.13.0",
     },
   ];
 
@@ -342,7 +342,10 @@ export default function Home() {
             variants={staggerContainer}
             className="mb-6 flex flex-col items-center space-y-2 text-center sm:flex-row sm:space-y-0 sm:space-x-8 sm:text-left"
           >
-            <motion.div variants={fadeInUp} className="flex items-center space-x-2">
+            <motion.div
+              variants={fadeInUp}
+              className="flex items-center space-x-2"
+            >
               <p className="text-sm font-medium text-muted-foreground">
                 Latest Version{" "}
                 <motion.span
@@ -356,14 +359,22 @@ export default function Home() {
                 </motion.span>
               </p>
             </motion.div>
-            <motion.div variants={fadeInUp} className="flex items-center space-x-2">
+            <motion.div
+              variants={fadeInUp}
+              className="flex items-center space-x-2"
+            >
               <p className="text-sm font-medium text-muted-foreground">
                 Downloads{" "}
                 <motion.span
                   key={downloads}
                   initial={{ opacity: 0, scale: 0.5, y: 10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 200,
+                    damping: 15,
+                    delay: 0.1,
+                  }}
                   className="font-semibold text-primary"
                 >
                   {downloads || "..."}
