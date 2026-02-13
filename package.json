@@ -43,6 +43,7 @@
 		]
 	},
 	"dependencies": {
+		"@sveltejs/adapter-node": "^5.5.3",
 		"posthog-js": "^1.260.3",
 		"posthog-node": "^5.8.0"
 	}
