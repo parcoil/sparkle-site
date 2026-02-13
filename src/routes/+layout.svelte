@@ -27,5 +27,7 @@
 <ModeWatcher />
 <Nav />
 <Toaster />
-<div class="min-h-screen">{@render children?.()}</div>
+<div class="min-h-screen pt-16">
+	{@render children?.()}
+</div>
 <Footer />
