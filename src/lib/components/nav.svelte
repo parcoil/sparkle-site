@@ -14,7 +14,8 @@
 		ExternalLink,
 		Trash2,
 		Grid2X2,
-		Home
+		Home,
+		FileText
 	} from '@lucide/svelte';
 	import ModeToggle from './modetoggle.svelte';
 	import Discord from './Discord.svelte';
@@ -35,6 +36,7 @@
 		{ name: 'Home', href: '/', icon: Home },
 		{ name: 'Debloat Script', href: '/debloat', icon: Trash2 },
 		{ name: 'Apps', href: '/apps', icon: Grid2X2 },
+		{ name: 'Patch Notes', href: '/patch-notes', icon: FileText },
 		{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink }
 	];
 
