@@ -23,7 +23,6 @@
 	import posthog from 'posthog-js';
 	import { browser } from '$app/environment';
 	import { toast } from 'svelte-sonner';
-	// import CodeTabs from '$lib/components/code-tabs.svelte';
 
 	let showMovedAlert = $state(false);
 	let version = $state('');
@@ -259,7 +258,7 @@
 <div class="mt-10 flex min-h-screen flex-col items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
 	<div class="flex w-full max-w-5xl flex-col items-center justify-center">
 		{#if $page.url.searchParams.get('ref') === 'parcoil-sparkle-page'}
-			<div class="mt-4 mb-6 w-full max-w-md">
+			<div class="animate-fade-in-up mt-4 mb-6 w-full max-w-md">
 				<Alert class="text-center">
 					<AlertTitle>Hello Parcoil user, Sparkle has moved to getsparkle.net</AlertTitle>
 				</Alert>
@@ -268,18 +267,24 @@
 
 		<button
 			type="button"
-			class="mb-6 cursor-pointer border-none bg-transparent p-0 transition-transform hover:scale-110"
+			class="animate-float mb-6 cursor-pointer border-none bg-transparent p-0 transition-transform hover:scale-110"
 			onclick={replayLogoAnimation}
 		>
 			<img src="/sparklelogo.png" alt="Sparkle Logo" class="h-20 w-20 sm:h-24 sm:w-24" />
 		</button>
 
 		<div class="m-mt-15 mb-4">
-			<h1 class="mb-4 text-center text-4xl font-medium sm:text-5xl md:text-7xl">
+			<h1
+				class="animate-fade-in-up mb-4 text-center text-4xl font-medium opacity-0 sm:text-5xl md:text-7xl"
+				style="animation-delay: 0.1s;"
+			>
 				Take control of your PC.
 			</h1>
 
-			<p class="text-center text-base text-muted-foreground sm:text-lg">
+			<p
+				class="animate-fade-in-up text-center text-base text-muted-foreground opacity-0 sm:text-lg"
+				style="animation-delay: 0.2s;"
+			>
 				Open-Source tool to optimize Windows and boost gaming performance
 				<br />
 				and enhance privacy.
@@ -287,7 +292,8 @@
 		</div>
 
 		<div
-			class="mb-6 flex flex-col items-center space-y-2 text-center sm:flex-row sm:space-y-0 sm:space-x-8 sm:text-left"
+			class="animate-fade-in-up mb-6 flex flex-col items-center space-y-2 text-center opacity-0 sm:flex-row sm:space-y-0 sm:space-x-8 sm:text-left"
+			style="animation-delay: 0.3s;"
 		>
 			<div class="flex items-center space-x-2">
 				<p class="text-sm font-medium text-muted-foreground">
@@ -304,7 +310,8 @@
 		</div>
 
 		<div
-			class="hidden w-full flex-col justify-center space-y-2 sm:flex sm:w-auto sm:flex-row sm:space-y-0 sm:space-x-4"
+			class="animate-fade-in-up hidden w-full flex-col justify-center space-y-2 opacity-0 sm:flex sm:w-auto sm:flex-row sm:space-y-0 sm:space-x-4"
+			style="animation-delay: 0.4s;"
 		>
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger class="w-full sm:w-auto">
@@ -345,18 +352,20 @@
 
 		<div class="relative flex w-full max-w-5xl flex-col items-center justify-center">
 			<div
-				class="absolute inset-0 -z-10 rounded-full bg-primary/30 blur-3xl dark:bg-accent/20"
+				class="animate-fade-in-up absolute inset-0 -z-10 rounded-full bg-primary/30 blur-3xl dark:bg-accent/20"
+				style="animation-delay: 0.5s;"
 			></div>
 			<img
 				src="/showcase.png"
 				alt="Sparkle Showcase"
-				class="relative z-10 mt-6 aspect-video w-full max-w-full rounded-md border-2 border-primary transition-all duration-300 hover:scale-105 sm:max-w-[800px] dark:border-accent"
+				class="animate-fade-in-up relative z-10 mt-6 aspect-video w-full max-w-full rounded-md border-2 border-primary opacity-0 transition-all duration-300 hover:scale-105 sm:max-w-[800px] dark:border-accent"
+				style="animation-delay: 0.6s;"
 			/>
 		</div>
 
-		<div class="w-full py-12">
+		<section id="features" class="w-full py-12">
 			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<div class="text-center">
+				<div class="animate-fade-in-up text-center opacity-0">
 					<h2 class="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">Features</h2>
 					<p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
 						Powerful Tweaks to optimize your Windows experience
@@ -364,9 +373,10 @@
 				</div>
 
 				<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					{#each features as feature}
+					{#each features as feature, i}
 						<Card.Root
-							class="group relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20"
+							class="animate-fade-in-up group relative overflow-hidden opacity-0 transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20"
+							style="animation-delay: {0.5 + i * 0.1}s;"
 						>
 							<Card.Header>
 								{@const Icon = feature.icon}
@@ -418,7 +428,7 @@
 				</script>
 			</div>
 
-			<div class="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
+			<section id="faqs" class="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div class="text-center">
 					<h2 class="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">FAQs</h2>
 					<p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
@@ -436,7 +446,7 @@
 						</Accordion.Item>
 					{/each}
 				</Accordion.Root>
-			</div>
+			</section>
 
 			<!-- Ad Block 2 -->
 			<div class="mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -489,6 +499,6 @@
 					(adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
 			</div>
-		</div>
+		</section>
 	</div>
 </div>
