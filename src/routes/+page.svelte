@@ -270,7 +270,12 @@
 			class="animate-float mb-6 cursor-pointer border-none bg-transparent p-0 transition-transform hover:scale-110"
 			onclick={replayLogoAnimation}
 		>
-			<img src="/sparklelogo.png" alt="Sparkle Logo" class="h-20 w-20 sm:h-24 sm:w-24" />
+			<img
+				src="/sparklelogo.png"
+				alt="Sparkle Logo"
+				class="h-20 w-20 sm:h-24 sm:w-24"
+				loading="lazy"
+			/>
 		</button>
 
 		<div class="m-mt-15 mb-4">
@@ -357,6 +362,7 @@
 			></div>
 			<img
 				src="/showcase.png"
+				loading="lazy"
 				alt="Sparkle Showcase"
 				class="animate-fade-in-up relative z-10 mt-6 aspect-video w-full max-w-full rounded-md border-2 border-primary opacity-0 transition-all duration-300 hover:scale-105 sm:max-w-[800px] dark:border-accent"
 				style="animation-delay: 0.6s;"
