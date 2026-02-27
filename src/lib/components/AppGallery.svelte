@@ -18,7 +18,7 @@
 				throw new Error(`HTTP error! status: ${response.status}`);
 			}
 
-			const data = await response.json();
+			let data = await response.json();
 
 			if (data.error) {
 				throw new Error(data.error);
@@ -29,7 +29,6 @@
 			if (!Array.isArray(data)) {
 				throw new Error('Expected an array of apps but got something else');
 			}
-
 			apps = data;
 
 			const newCategories = new Set(['all']);
@@ -49,13 +48,15 @@
 	});
 
 	const filteredApps = $derived(
-		apps.filter((app) => {
-			const matchesSearch =
-				app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				app.id.toLowerCase().includes(searchQuery.toLowerCase());
-			const matchesCategory = selectedCategory === 'all' || app.category === selectedCategory;
-			return matchesSearch && matchesCategory;
-		})
+		apps
+			.filter((app) => {
+				const matchesSearch =
+					app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+					app.id.toLowerCase().includes(searchQuery.toLowerCase());
+				const matchesCategory = selectedCategory === 'all' || app.category === selectedCategory;
+				return matchesSearch && matchesCategory;
+			})
+			.sort((a, b) => a.name.localeCompare(b.name))
 	);
 
 	function clearSearch(event: MouseEvent) {
