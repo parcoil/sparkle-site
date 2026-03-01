@@ -18,12 +18,12 @@ export async function GET() {
   const releases = await res.json();
 
   const patchNotes = releases.map((release: any) => ({
-    version: release.tag_name.replace("v", ""),
-    date: new Date(release.published_at).toLocaleDateString("en-US", {
+    version: release.tag_name ? release.tag_name.replace("v", "") : "Unknown",
+    date: release.published_at ? new Date(release.published_at).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
-    }),
+    }) : "Unknown",
     features: [],
     fixes: [],
     breaking: [],

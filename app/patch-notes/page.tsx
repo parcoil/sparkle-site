@@ -62,7 +62,7 @@ export default async function PatchNotesPage() {
   const releases = await getReleases();
 
   return (
-    <div className="container mx-auto mt-20 min-h-screen px-4 py-12">
+    <div className="container mx-auto mt-5 min-h-screen px-4 py-12">
       <div className="mx-auto max-w-3xl">
         <div className="mb-12 text-center">
           <h1 className="animate-gradient mb-4 bg-gradient-to-r from-[#0096ff] to-[#0042ff] bg-clip-text pb-2 text-4xl font-bold text-transparent sm:text-5xl">

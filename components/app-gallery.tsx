@@ -38,11 +38,12 @@ export default function AppGallery() {
 
 				console.log('Fetched apps data:', data);
 
-				if (!Array.isArray(data)) {
+			if (!Array.isArray(data)) {
 					throw new Error('Expected an array of apps but got something else');
 				}
 
-				setApps(data);
+				const validApps = data.filter((app: App) => app?.id && app?.name);
+				setApps(validApps);
 
 				const newCategories = new Set(['all']);
 				data.forEach((app: App) => {
@@ -64,6 +65,7 @@ export default function AppGallery() {
 
 	const filteredApps = useMemo(() => {
 		return apps.filter((app) => {
+			if (!app?.id || !app?.name) return false;
 			const matchesSearch =
 				app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 				app.id.toLowerCase().includes(searchQuery.toLowerCase());
