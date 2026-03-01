@@ -4,13 +4,20 @@ import { Badge } from "@/components/ui/badge";
 async function getReleases() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL || "http://localhost:3000"}/api/releases`,
-      {
-        next: { revalidate: 3600 },
-      },
+      "https://api.github.com/repos/Parcoil/Sparkle/releases?per_page=20",
+      { redirect: "follow", next: { revalidate: 3600 } }
     );
     if (!res.ok) return null;
-    return res.json();
+    const releases = await res.json();
+    return releases.map((release: any) => ({
+      version: release.tag_name ? release.tag_name.replace("v", "") : "Unknown",
+      date: release.published_at ? new Date(release.published_at).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }) : "Unknown",
+      body: release.body || "",
+    }));
   } catch {
     return null;
   }

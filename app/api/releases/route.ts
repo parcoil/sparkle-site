@@ -4,6 +4,7 @@ export async function GET() {
   const res = await fetch(
     "https://api.github.com/repos/Parcoil/Sparkle/releases?per_page=20",
     {
+      redirect: "follow",
       next: { revalidate: 3600 },
     },
   );
