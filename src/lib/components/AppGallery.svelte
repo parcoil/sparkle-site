@@ -48,15 +48,13 @@
 	});
 
 	const filteredApps = $derived(
-		apps
-			.filter((app) => {
-				const matchesSearch =
-					app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-					app.id.toLowerCase().includes(searchQuery.toLowerCase());
-				const matchesCategory = selectedCategory === 'all' || app.category === selectedCategory;
-				return matchesSearch && matchesCategory;
-			})
-			.sort((a, b) => a.name.localeCompare(b.name))
+		apps.filter((app) => {
+			const matchesSearch =
+				app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+				app.id.toLowerCase().includes(searchQuery.toLowerCase());
+			const matchesCategory = selectedCategory === 'all' || app.category === selectedCategory;
+			return matchesSearch && matchesCategory;
+		})
 	);
 
 	function clearSearch(event: MouseEvent) {

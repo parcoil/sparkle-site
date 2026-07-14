@@ -195,7 +195,7 @@
 						<span class="text-sm font-medium">Theme</span>
 						<ModeToggle />
 					</div>
-					<p class="text-center text-sm text-primary">Vist on desktop to download Sparkle</p>
+					<p class="text-center text-sm text-primary">Visit on desktop to download Sparkle</p>
 				</div>
 			</div>
 		</div>

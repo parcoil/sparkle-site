@@ -19,6 +19,7 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { Alert, AlertTitle } from '$lib/components/ui/alert';
 	import * as Accordion from '$lib/components/ui/accordion';
+	import CodeTabs from '$lib/components/code-tabs.svelte';
 	import { page } from '$app/stores';
 	import posthog from 'posthog-js';
 	import { browser } from '$app/environment';
@@ -349,11 +350,9 @@
 			</p>
 		</div>
 
-		<!-- <p class="mt-4 text-sm text-muted-foreground select-none">CLI Install:</p>
+		<p class="mt-4 text-sm text-muted-foreground select-none">CLI Install:</p>
 
-		<div class="mt-4 w-full max-w-md">
-			<CodeTabs tabs={installMethods} class="z-40! w-sm gap-0" />
-		</div> -->
+		<CodeTabs tabs={installMethods} class="z-40! w-sm mt-4 gap-0" />
 
 		<div class="relative flex w-full max-w-5xl flex-col items-center justify-center">
 			<div
@@ -379,7 +378,7 @@
 				</div>
 
 				<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					{#each features as feature, i}
+					{#each features as feature, i (feature.title)}
 						<Card.Root
 							class="animate-fade-in-up group relative overflow-hidden opacity-0 transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20"
 							style="animation-delay: {0.5 + i * 0.1}s;"
@@ -405,7 +404,7 @@
 									{feature.description}
 								</Card.Description>
 								<div class="mt-4 flex flex-wrap gap-2">
-									{#each feature.categories as category}
+									{#each feature.categories as category (category)}
 										<span
 											class="inline-flex items-center rounded-full bg-accent/50 px-2.5 py-0.5 text-xs font-medium text-accent-foreground"
 										>
@@ -443,7 +442,7 @@
 				</div>
 
 				<Accordion.Root type="single" class="mt-6 space-y-2">
-					{#each faqs as faq}
+					{#each faqs as faq (faq.question)}
 						<Accordion.Item value={faq.question}>
 							<Accordion.Trigger>{faq.question}</Accordion.Trigger>
 							<Accordion.Content class="text-muted-foreground">

@@ -54,7 +54,7 @@
 	/>
 </svelte:head>
 
-<div class="container mx-auto mt-20 min-h-screen px-4 py-12">
+<div class="container mx-auto mt-5 min-h-screen px-4 py-12">
 	<div class="mx-auto max-w-3xl">
 		<div class="mb-12 text-center">
 			<h1
