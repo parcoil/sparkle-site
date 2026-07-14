@@ -165,7 +165,7 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.06,
     },
   },
 };
@@ -177,8 +177,8 @@ const scaleIn = {
     scale: 1,
     transition: {
       type: "spring",
-      stiffness: 100,
-      damping: 15,
+      stiffness: 200,
+      damping: 20,
     },
   },
 };
@@ -284,7 +284,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
               className="mt-4 mb-6 w-full max-w-md"
             >
               <Alert className="text-center">
@@ -299,10 +299,10 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{
-              duration: 0.8,
+              duration: 0.5,
               type: "spring",
-              stiffness: 100,
-              damping: 15,
+              stiffness: 200,
+              damping: 20,
             }}
             whileHover={{ scale: 1.1, rotate: 5 }}
             onClick={replayLogoAnimation}
@@ -319,7 +319,7 @@ export default function Home() {
           >
             <motion.h1
               variants={fadeInUp}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.35 }}
               className="mb-4 text-center text-4xl font-medium sm:text-5xl md:text-7xl"
             >
               Take control of your PC.
@@ -327,7 +327,7 @@ export default function Home() {
 
             <motion.p
               variants={fadeInUp}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.35, delay: 0.06 }}
               className="text-center text-base text-muted-foreground sm:text-lg"
             >
               Open-Source tool to optimize Windows and boost gaming performance
@@ -352,7 +352,7 @@ export default function Home() {
                   key={version}
                   initial={{ opacity: 0, scale: 0.5, y: 10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   className="font-semibold text-primary"
                 >
                   {version || "..."}
@@ -371,9 +371,9 @@ export default function Home() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{
                     type: "spring",
-                    stiffness: 200,
-                    damping: 15,
-                    delay: 0.1,
+                    stiffness: 300,
+                    damping: 20,
+                    delay: 0.06,
                   }}
                   className="font-semibold text-primary"
                 >
@@ -391,7 +391,7 @@ export default function Home() {
           >
             <motion.div
               variants={fadeInUp}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.12 }}
             >
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -448,7 +448,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.18 }}
             className="mt-4 flex flex-col items-center justify-center space-y-2 px-4 text-center sm:hidden"
           >
             <p className="text-sm font-semibold text-primary">
@@ -459,7 +459,7 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.3, delay: 0.24 }}
             className="mt-4 text-sm text-muted-foreground select-none"
           >
             CLI Install:
@@ -468,7 +468,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
           >
             <CodeTabs tabs={installMethods} className="w-sm gap-0 mt-4 z-40!" />
           </motion.div>
@@ -477,13 +477,13 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.36 }}
               className="absolute inset-0 dark:bg-accent/20 bg-primary/30 blur-3xl rounded-full -z-10"
             ></motion.div>
             <motion.img
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
+              transition={{ duration: 0.5, delay: 0.42 }}
               whileHover={{ scale: 1.05 }}
               src="/showcase.png"
               alt="Sparkle Logo"
@@ -498,7 +498,7 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={fadeInUp}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.35 }}
                 className="text-center"
               >
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -520,13 +520,13 @@ export default function Home() {
                   <motion.div
                     key={feature.title}
                     variants={fadeInUp}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    transition={{ duration: 0.3, delay: index * 0.06 }}
                   >
                     <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20">
                       <CardHeader>
                         <motion.div
                           whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                          transition={{ duration: 0.5 }}
+                          transition={{ duration: 0.3 }}
                           className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/40 text-primary"
                         >
                           <feature.icon
@@ -543,7 +543,7 @@ export default function Home() {
                               animate={{ scale: 1 }}
                               transition={{
                                 type: "spring",
-                                delay: 0.5 + index * 0.1,
+                                delay: 0.3 + index * 0.06,
                               }}
                               className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800"
                             >
@@ -561,7 +561,7 @@ export default function Home() {
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{
-                                delay: 0.6 + index * 0.1 + catIndex * 0.05,
+                                delay: 0.36 + index * 0.06 + catIndex * 0.03,
                               }}
                               className="inline-flex items-center rounded-full bg-accent/50 px-2.5 py-0.5 text-xs font-medium text-accent-foreground"
                             >
@@ -597,7 +597,7 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={fadeInUp}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.35 }}
                 className="text-center"
               >
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -619,7 +619,7 @@ export default function Home() {
                     <motion.div
                       key={faq.question}
                       variants={fadeInUp}
-                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      transition={{ duration: 0.25, delay: index * 0.03 }}
                     >
                       <AccordionItem value={faq.question}>
                         <AccordionTrigger>{faq.question}</AccordionTrigger>
