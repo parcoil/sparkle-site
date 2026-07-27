@@ -23,7 +23,6 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Sun, Moon } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 
 const navItems = [
@@ -50,18 +49,8 @@ function DiscordIcon({ className }: { className?: string }) {
 }
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [version, setVersion] = useState("");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     async function fetchVersion() {
@@ -95,28 +84,23 @@ export default function Nav() {
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full min-w-screen transition-all duration-300",
-        scrolled
-          ? "border-b bg-background/80 backdrop-blur-md"
-          : "bg-transparent",
+        "fixed top-4 left-1/2 z-50 w-full max-w-6xl -translate-x-1/2 rounded-2xl px-4 sm:px-6 lg:px-8 transition-all duration-300 border bg-background/80 shadow-lg backdrop-blur-md",
       )}
     >
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <img
-                src="/sparklelogo.png"
-                alt="Sparkle Logo"
-                className="h-8 w-auto"
-              />
-              <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-xl font-bold text-transparent">
-                Sparkle
-              </span>
-            </Link>
-          </div>
+      <nav aria-label="Top">
+        <div className="flex h-16 items-center">
+          <Link href="/" className="flex items-center space-x-2 shrink-0">
+            <img
+              src="/sparklelogo.png"
+              alt="Sparkle Logo"
+              className="h-8 w-auto"
+            />
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-xl font-bold text-transparent">
+              Sparkle
+            </span>
+          </Link>
 
-          <div className="hidden items-center space-x-8 md:flex">
+          <div className="hidden items-center space-x-6 ml-8 md:flex">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -127,51 +111,52 @@ export default function Nav() {
                 {item.name}
               </Link>
             ))}
-            <div className="flex items-center space-x-2">
-              <a
-                href="https://dsc.gg/parcoil"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
-                aria-label="Discord Server"
-              >
-                <DiscordIcon className="h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com/Parcoil/Sparkle"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
-                aria-label="GitHub repository"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <ModeToggle />
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button className="ml-2">
-                    <Download className="mr-2 h-4 w-4" />
-                    Download
-                    <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-48" align="end">
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={() => handleDownload("exe")}>
-                      <Download className="mr-2 h-4 w-4" />
-                      <span>Installer (.exe)</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleDownload("zip")}>
-                      <Download className="mr-2 h-4 w-4" />
-                      <span>Portable (.zip)</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
           </div>
 
-          <div className="md:hidden">
+          <div className="flex items-center space-x-2 ml-auto shrink-0">
+            <a
+              href="https://dsc.gg/parcoil"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+              aria-label="Discord Server"
+            >
+              <DiscordIcon className="h-5 w-5" />
+            </a>
+            <a
+              href="https://github.com/Parcoil/Sparkle"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+              aria-label="GitHub repository"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+            <ModeToggle />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button>
+                  <Download className="mr-2 h-4 w-4" />
+                  Download
+                  <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-48" align="end">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={() => handleDownload("exe")}>
+                    <Download className="mr-2 h-4 w-4" />
+                    <span>Installer (.exe)</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleDownload("zip")}>
+                    <Download className="mr-2 h-4 w-4" />
+                    <span>Portable (.zip)</span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          <div className="md:hidden shrink-0 ml-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 hover:text-foreground focus:outline-none"
