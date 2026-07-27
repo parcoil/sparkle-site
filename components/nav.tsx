@@ -133,6 +133,7 @@ export default function Nav() {
               <Github className="h-5 w-5" />
             </a>
             <ModeToggle />
+            <div className="hidden md:block">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button>
@@ -154,6 +155,7 @@ export default function Nav() {
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
+            </div>
           </div>
 
           <div className="md:hidden shrink-0 ml-2">
