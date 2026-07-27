@@ -4,7 +4,6 @@
 	import posthog from 'posthog-js';
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import { cn } from '$lib/utils';
 	import {
 		Menu,
 		X,
@@ -20,17 +19,8 @@
 	import ModeToggle from './modetoggle.svelte';
 	import Discord from './Discord.svelte';
 
-	let scrolled = $state(false);
 	let mobileMenuOpen = $state(false);
-
-	onMount(() => {
-		const handleScroll = () => {
-			scrolled = window.scrollY > 10;
-		};
-
-		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
-	});
+	let version = $state('');
 
 	const navItems = [
 		{ name: 'Home', href: '/', icon: Home },
@@ -39,8 +29,6 @@
 		{ name: 'Patch Notes', href: '/patch-notes', icon: FileText },
 		{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink }
 	];
-
-	let version = $state('');
 
 	onMount(async () => {
 		try {
@@ -75,25 +63,20 @@
 </script>
 
 <header
-	class={cn(
-		'fixed top-0 z-50 w-full min-w-screen transition-all duration-300',
-		scrolled ? 'border-b bg-background/80 backdrop-blur-md' : 'bg-transparent'
-	)}
+	class="fixed top-4 left-1/2 z-50 w-full max-w-6xl -translate-x-1/2 rounded-2xl border bg-background/80 px-4 shadow-lg backdrop-blur-md transition-all duration-300 sm:px-6 lg:px-8"
 >
-	<nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
-		<div class="flex h-16 items-center justify-between">
-			<div class="flex items-center">
-				<a href="/" class="flex items-center space-x-2">
-					<img src="/sparklelogo.png" alt="Sparkle Logo" class="h-8 w-auto" />
-					<span
-						class="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-xl font-bold text-transparent"
-					>
-						Sparkle
-					</span>
-				</a>
-			</div>
+	<nav aria-label="Top">
+		<div class="flex h-16 items-center">
+			<a href="/" class="flex shrink-0 items-center space-x-2">
+				<img src="/sparklelogo.png" alt="Sparkle Logo" class="h-8 w-auto" />
+				<span
+					class="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-xl font-bold text-transparent"
+				>
+					Sparkle
+				</span>
+			</a>
 
-			<div class="hidden items-center space-x-8 md:flex">
+			<div class="ml-8 hidden items-center space-x-6 md:flex">
 				{#each navItems as item}
 					<a
 						href={item.href}
@@ -106,51 +89,52 @@
 						{item.name}
 					</a>
 				{/each}
-				<div class="flex items-center space-x-2">
-					<a
-						href="https://dsc.gg/parcoil"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
-						aria-label="Discord Server"
-					>
-						<Discord class="h-5 w-5" />
-					</a>
-					<a
-						href="https://github.com/Parcoil/Sparkle"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
-						aria-label="GitHub repository"
-					>
-						<Github class="h-5 w-5" />
-					</a>
-					<ModeToggle />
-					<DropdownMenu.Root>
-						<DropdownMenu.Trigger>
-							<Button variant="default" class="ml-2">
-								<Download class="mr-2 h-4 w-4" />
-								Download
-								<ChevronDown class="ml-2 h-4 w-4 opacity-50" />
-							</Button>
-						</DropdownMenu.Trigger>
-						<DropdownMenu.Content class="w-48" align="end">
-							<DropdownMenu.Group>
-								<DropdownMenu.Item onSelect={() => handleDownload('exe')}>
-									<Download class="mr-2 h-4 w-4" />
-									<span>Installer (.exe)</span>
-								</DropdownMenu.Item>
-								<DropdownMenu.Item onSelect={() => handleDownload('zip')}>
-									<Download class="mr-2 h-4 w-4" />
-									<span>Portable (.zip)</span>
-								</DropdownMenu.Item>
-							</DropdownMenu.Group>
-						</DropdownMenu.Content>
-					</DropdownMenu.Root>
-				</div>
 			</div>
 
-			<div class="md:hidden">
+			<div class="ml-auto flex shrink-0 items-center space-x-2">
+				<a
+					href="https://dsc.gg/parcoil"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+					aria-label="Discord Server"
+				>
+					<Discord class="h-5 w-5" />
+				</a>
+				<a
+					href="https://github.com/Parcoil/Sparkle"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+					aria-label="GitHub repository"
+				>
+					<Github class="h-5 w-5" />
+				</a>
+				<ModeToggle />
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger>
+						<Button>
+							<Download class="mr-2 h-4 w-4" />
+							Download
+							<ChevronDown class="ml-2 h-4 w-4 opacity-50" />
+						</Button>
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content class="w-48" align="end">
+						<DropdownMenu.Group>
+							<DropdownMenu.Item onSelect={() => handleDownload('exe')}>
+								<Download class="mr-2 h-4 w-4" />
+								<span>Installer (.exe)</span>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item onSelect={() => handleDownload('zip')}>
+								<Download class="mr-2 h-4 w-4" />
+								<span>Portable (.zip)</span>
+							</DropdownMenu.Item>
+						</DropdownMenu.Group>
+					</DropdownMenu.Content>
+				</DropdownMenu.Root>
+			</div>
+
+			<div class="ml-2 shrink-0 md:hidden">
 				<button
 					onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
 					class="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 hover:text-foreground focus:outline-none"
@@ -195,7 +179,6 @@
 						<span class="text-sm font-medium">Theme</span>
 						<ModeToggle />
 					</div>
-					<p class="text-center text-sm text-primary">Visit on desktop to download Sparkle</p>
 				</div>
 			</div>
 		</div>

@@ -29,7 +29,8 @@
 			if (!Array.isArray(data)) {
 				throw new Error('Expected an array of apps but got something else');
 			}
-			apps = data;
+			const validApps = data.filter((app: any) => app?.id && app?.name);
+			apps = validApps;
 
 			const newCategories = new Set(['all']);
 			data.forEach((app: any) => {
@@ -49,6 +50,7 @@
 
 	const filteredApps = $derived(
 		apps.filter((app) => {
+			if (!app?.id || !app?.name) return false;
 			const matchesSearch =
 				app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 				app.id.toLowerCase().includes(searchQuery.toLowerCase());
