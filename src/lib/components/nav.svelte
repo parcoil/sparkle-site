@@ -111,6 +111,7 @@
 					<Github class="h-5 w-5" />
 				</a>
 				<ModeToggle />
+				<div class="hidden md:block">
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger>
 						<Button>
@@ -132,6 +133,7 @@
 						</DropdownMenu.Group>
 					</DropdownMenu.Content>
 				</DropdownMenu.Root>
+				</div>
 			</div>
 
 			<div class="ml-2 shrink-0 md:hidden">
