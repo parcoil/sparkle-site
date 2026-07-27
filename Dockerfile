@@ -6,13 +6,13 @@ RUN corepack enable
 # Install dependencies
 FROM base AS deps
 COPY package.json pnpm-lock.yaml* ./
-RUN pnpm install --frozen-lockfile
+RUN npm install
 
 # Build the app
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm build
+RUN npm run build
 
 # Production image
 FROM node:24-alpine AS runner
