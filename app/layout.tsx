@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Fira_Code } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Nav from "@/components/nav";
@@ -44,6 +45,16 @@ export default function RootLayout({
           <Toaster />
           <Footer />
         </ThemeProvider>
+        <Script
+          defer
+          src="https://umami.parcoil.com/script.js"
+          data-website-id="9924bb71-c86f-4f31-8365-b3bf3cc99f88"
+        />
+        <Script
+          defer
+          src="https://umami.parcoil.com/recorder.js"
+          data-website-id="9924bb71-c86f-4f31-8365-b3bf3cc99f88"
+        />
       </body>
     </html>
   );
