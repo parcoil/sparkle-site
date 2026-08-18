@@ -19,7 +19,7 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Sparkle - Take control of your PC",
+  title: "Sparkle Debloater",
   description: "A Windows app to debloat and optimize your PC",
 };
 

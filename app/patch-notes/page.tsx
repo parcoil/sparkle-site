@@ -5,17 +5,19 @@ async function getReleases() {
   try {
     const res = await fetch(
       "https://api.github.com/repos/Parcoil/Sparkle/releases?per_page=20",
-      { redirect: "follow", next: { revalidate: 3600 } }
+      { redirect: "follow", next: { revalidate: 3600 } },
     );
     if (!res.ok) return null;
     const releases = await res.json();
     return releases.map((release: any) => ({
       version: release.tag_name ? release.tag_name.replace("v", "") : "Unknown",
-      date: release.published_at ? new Date(release.published_at).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }) : "Unknown",
+      date: release.published_at
+        ? new Date(release.published_at).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        : "Unknown",
       body: release.body || "",
     }));
   } catch {
@@ -25,7 +27,7 @@ async function getReleases() {
 
 function parseMarkdown(text: string): string {
   if (!text) return "";
-
+  text = text.replace(/^### Checksums[\s\S]*$/m, "");
   let html = text
     .replace(
       /^### (.*$)/gm,
@@ -42,10 +44,15 @@ function parseMarkdown(text: string): string {
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
     .replace(
       /`([^`]+)`/g,
-      '<code class="bg-muted px-1 py-0.5 rounded text-sm">$1</code>',
+      '<code class="bg-accent px-1 py-0.5 rounded text-sm">$1</code>',
+    )
+    .replace(
+      /<img([^>]*?)>/gi,
+      '<img$1 class="my-4 block max-w-full rounded-lg" />',
     )
     .replace(/\n\n/g, '</p><p class="mb-3">')
-    .replace(/\n(?=<li)/g, "\n");
+    .replace(/\n(?=<li)/g, "\n")
+    .replace("checksums", "");
 
   html = '<p class="mb-3">' + html + "</p>";
 
@@ -72,7 +79,7 @@ export default async function PatchNotesPage() {
     <div className="container mx-auto mt-5 min-h-screen px-4 py-12">
       <div className="mx-auto max-w-3xl">
         <div className="mb-12 text-center">
-          <h1 className="animate-gradient mb-4 bg-gradient-to-r from-[#0096ff] to-[#0042ff] bg-clip-text pb-2 text-4xl font-bold text-transparent sm:text-5xl">
+          <h1 className="animate-gradient mb-4 bg-linear-to-r from-[#0096ff] to-[#0042ff] bg-clip-text pb-2 text-4xl font-bold text-transparent sm:text-5xl">
             Patch Notes
           </h1>
           <p className="text-lg text-muted-foreground">
@@ -88,8 +95,11 @@ export default async function PatchNotesPage() {
         ) : (
           <div className="space-y-8">
             {releases.map((patch: any) => (
-              <Card key={patch.version} className="overflow-hidden">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+              <Card
+                key={patch.version}
+                className="overflow-hidden p-0 pb-6 pt-6 gap-2"
+              >
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 mb-0 border-b">
                   <div className="flex items-center gap-3">
                     <Badge variant="default" className="text-sm">
                       v{patch.version}
