@@ -182,9 +182,9 @@
     @apply bg-background text-foreground;
   }
 }
-* {
+/* * {
   scrollbar-color: var(--color-primary) transparent;
-}
+} */
 body {
   margin: 0;
   padding: 0;
@@ -204,4 +204,11 @@ html body[data-scroll-locked] {
 body::selection {
   background-color: var(--accent);
   color: var(--accent-foreground);
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+body {
+  scrollbar-width: none;
 }
