@@ -9,8 +9,8 @@ import {
   Network,
   ChevronDown,
   Star,
-  Zap,
-  Copy,
+  Box,
+  LayoutGrid,
   Trash2,
   Package,
   Wrench,
@@ -96,15 +96,13 @@ const features = [
       "Removes unnecessary Windows features and apps to free up resources and improve performance.",
     icon: Star,
     iconColor: "text-teal-500",
-    categories: ["Performance", "Privacy"],
   },
   {
-    title: "System Optimization",
+    title: "Apply Tweaks",
     description:
-      "Enhance system performance and responsiveness with carefully selected tweaks.",
-    icon: Zap,
+      "Apply various tweaks to debloat windows, disable game bar, enable detailed bsod And more ",
+    icon: Wrench,
     iconColor: "text-pink-500",
-    categories: ["Performance"],
   },
   {
     title: "Clean Temporary Files",
@@ -112,7 +110,6 @@ const features = [
       "Remove temporary files, caches, and logs to free up valuable disk space.",
     icon: Trash2,
     iconColor: "text-yellow-500",
-    categories: ["Maintenance"],
   },
   {
     title: "Safe & Reversible",
@@ -120,33 +117,29 @@ const features = [
       "All changes can be easily undone with system restore points or by reverting settings.",
     icon: Shield,
     iconColor: "text-red-500",
-    categories: ["Security"],
   },
   {
     title: "App Installer",
     description:
       "Quickly install your favorite applications using winget or chocolatey without leaving Sparkle.",
-    icon: Package,
+    icon: LayoutGrid,
     iconColor: "text-blue-500",
-    categories: ["Productivity"],
   },
   {
     title: "System Utilities",
     description:
       "Run essential system tools like SFC, Check Disk, and DISM from a simple, intuitive interface.",
-    icon: Wrench,
+    icon: Box,
     iconColor: "text-green-500",
-    categories: ["Maintenance"],
   },
-  {
-    title: "Network Optimizer",
-    description:
-      "Optimize your network settings and change DNS for improved speed and security.",
-    icon: Network,
-    iconColor: "text-purple-500",
-    new: false,
-    categories: ["Performance", "Networking"],
-  },
+  // {
+  //   title: "Network Optimizer",
+  //   description:
+  //     "Optimize your network settings and change DNS for improved speed and security.",
+  //   icon: Network,
+  //   iconColor: "text-purple-500",
+  //   new: false,
+  // },
 ];
 
 // Animation variants
@@ -508,13 +501,12 @@ export default function Home() {
                   Powerful Tweaks to optimize your Windows experience
                 </p>
               </motion.div>
-
               <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
               >
                 {features.map((feature, index) => (
                   <motion.div
@@ -522,58 +514,32 @@ export default function Home() {
                     variants={fadeInUp}
                     transition={{ duration: 0.3, delay: index * 0.06 }}
                   >
-                    <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20">
-                      <CardHeader>
+                    <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20 h-full flex flex-col">
+                      <CardHeader className="pb-3">
                         <motion.div
-                          whileHover={{ rotate: [0, -10, 10, -10, 0] }}
                           transition={{ duration: 0.3 }}
-                          className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/40 text-primary"
+                          className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/40 text-primary"
                         >
                           <feature.icon
-                            className={`h-6 w-6 ${feature.iconColor}`}
+                            className={`h-5 w-5 ${feature.iconColor}`}
                           />
                         </motion.div>
                         <div className="flex items-center gap-2">
-                          <CardTitle className="text-lg font-semibold">
+                          <CardTitle className="text-base font-semibold">
                             {feature.title}
                           </CardTitle>
-                          {feature.new && (
-                            <motion.span
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              transition={{
-                                type: "spring",
-                                delay: 0.3 + index * 0.06,
-                              }}
-                              className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800"
-                            >
-                              New
-                            </motion.span>
-                          )}
                         </div>
-                        <CardDescription className="mt-2 text-muted-foreground">
+                        <CardDescription className="mt-2 text-xs text-muted-foreground">
                           {feature.description}
                         </CardDescription>
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {feature.categories.map((category, catIndex) => (
-                            <motion.span
-                              key={category}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{
-                                delay: 0.36 + index * 0.06 + catIndex * 0.03,
-                              }}
-                              className="inline-flex items-center rounded-full bg-accent/50 px-2.5 py-0.5 text-xs font-medium text-accent-foreground"
-                            >
-                              {category}
-                            </motion.span>
-                          ))}
-                        </div>
                       </CardHeader>
                     </Card>
                   </motion.div>
                 ))}
               </motion.div>
+              <p className="text-center text-sm font-medium mt-3 mb-3 text-muted-foreground">
+                With more features in the app{" "}
+              </p>
             </div>
 
             <ins
