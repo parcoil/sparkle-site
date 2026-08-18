@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Download, ChevronDown, Github } from "lucide-react";
+import { Menu, X, Download, ChevronDown, Github, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -90,15 +90,22 @@ export default function Nav() {
           </Link>
 
           <div className="hidden items-center space-x-6 ml-8 md:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="flex items-center text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isExternalLink = !item.href.startsWith("/");
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  target={isExternalLink ? "_blank" : undefined}
+                  rel={isExternalLink ? "noopener noreferrer" : undefined}
+                  className="flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+                >
+                  <span>{item.name}</span>
+                  {isExternalLink && <ExternalLink className="h-3.5 w-3.5" />}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="flex items-center space-x-2 ml-auto shrink-0">
