@@ -2,18 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-  Menu,
-  X,
-  Download,
-  ChevronDown,
-  Github,
-  ExternalLink,
-  Trash2,
-  Grid2X2,
-  Home,
-  FileText,
-} from "lucide-react";
+import { Menu, X, Download, ChevronDown, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -26,11 +15,11 @@ import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 
 const navItems = [
-  { name: "Home", href: "/", icon: Home },
-  { name: "Debloat Script", href: "/debloat", icon: Trash2 },
-  { name: "Apps", href: "/apps", icon: Grid2X2 },
-  { name: "Patch Notes", href: "/patch-notes", icon: FileText },
-  { name: "Docs", href: "https://docs.getsparkle.net", icon: ExternalLink },
+  // { name: "Home", href: "/" },
+  { name: "Debloat Script", href: "/debloat" },
+  { name: "Apps", href: "/apps" },
+  { name: "Patch Notes", href: "/patch-notes" },
+  { name: "Docs", href: "https://docs.getsparkle.net" },
 ];
 
 function DiscordIcon({ className }: { className?: string }) {
@@ -107,7 +96,6 @@ export default function Nav() {
                 href={item.href}
                 className="flex items-center text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
               >
-                <item.icon className="mr-2 h-4 w-4" />
                 {item.name}
               </Link>
             ))}
@@ -134,27 +122,27 @@ export default function Nav() {
             </a>
             <ModeToggle />
             <div className="hidden md:block">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button>
-                  <Download className="mr-2 h-4 w-4" />
-                  Download
-                  <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-48" align="end">
-                <DropdownMenuGroup>
-                  <DropdownMenuItem onClick={() => handleDownload("exe")}>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button>
                     <Download className="mr-2 h-4 w-4" />
-                    <span>Installer (.exe)</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => handleDownload("zip")}>
-                    <Download className="mr-2 h-4 w-4" />
-                    <span>Portable (.zip)</span>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                    Download
+                    <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-48" align="end">
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem onClick={() => handleDownload("exe")}>
+                      <Download className="mr-2 h-4 w-4" />
+                      <span>Installer (.exe)</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleDownload("zip")}>
+                      <Download className="mr-2 h-4 w-4" />
+                      <span>Portable (.zip)</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
