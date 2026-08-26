@@ -409,8 +409,8 @@ export default function Home() {
               </DropdownMenu>
             </motion.div>
 
-            {/* <a
-              href="https://github.com/Parcoil/Sparkle"
+            <a
+              href="https://github.com/thedogecraft/sparkle"
               className="w-full sm:w-auto"
             >
               <Button
@@ -420,7 +420,7 @@ export default function Home() {
                 <Github className="mr-2 h-4 w-4" />
                 View on GitHub
               </Button>
-            </a> */}
+            </a>
           </motion.div>
 
           {/* <div className="group relative mt-4 hidden w-full sm:mt-6 sm:flex sm:max-w-md">
@@ -437,7 +437,23 @@ export default function Home() {
               Click to copy PowerShell command
             </span>
           </div> */}
-
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.18 }}
+            className="mt-4 flex flex-col items-center justify-center space-y-2 px-4 text-center"
+          >
+            <p className="text-sm font-semibold text-red-500">
+              Our Servers are currently having some issues. If downloads dont
+              work please use{" "}
+              <a
+                href="https://github.com/thedogecraft/sparkle"
+                className="underline"
+              >
+                GitHub
+              </a>
+            </p>
+          </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
