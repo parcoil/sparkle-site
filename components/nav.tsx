@@ -2,7 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Download, ChevronDown, Github, ExternalLink } from "lucide-react";
+import {
+  Menu,
+  X,
+  Download,
+  ChevronDown,
+  Github,
+  ExternalLink,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,6 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
+import GithubIcon from "./githubicon";
 
 const navItems = [
   // { name: "Home", href: "/" },
@@ -127,7 +135,7 @@ export default function Nav() {
               className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
               aria-label="GitHub repository"
             >
-              <Github className="h-5 w-5" />
+              <GithubIcon className="h-5 w-5" />
             </a>
             <ModeToggle />
             <div className="hidden md:block">
@@ -194,7 +202,7 @@ export default function Nav() {
                   className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
                   aria-label="GitHub repository"
                 >
-                  <Github className="h-5 w-5" />
+                  <GithubIcon className="h-5 w-5" />
                 </a>
               </div>
               <div className="flex items-center justify-between px-3 py-2">

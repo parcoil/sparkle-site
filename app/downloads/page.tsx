@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CodeTabs } from "@/components/code-tabs";
+import GithubIcon from "@/components/githubicon";
 
 export default function DownloadsPage() {
   const [version, setVersion] = useState("");
@@ -232,7 +233,7 @@ export default function DownloadsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Github className="h-4 w-4" />
+                      <GithubIcon className="h-4 w-4" />
                       View Source
                     </a>
                   </Button>
