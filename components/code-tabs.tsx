@@ -86,7 +86,7 @@ export function CodeTabs({ tabs, defaultValue, className }: CodeTabsProps) {
         >
           <pre className="overflow-x-auto">
             <code className="font-mono text-sm text-foreground">
-              {tab.code}
+              {tab.code.trim()}
             </code>
           </pre>
         </TabsContent>
