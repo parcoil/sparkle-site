@@ -41,6 +41,7 @@ import {
 } from "@/components/ui/accordion";
 import { CodeTabs } from "@/components/code-tabs";
 import ReactLenis from "lenis/react";
+import Link from "next/link";
 
 const faqs = [
   {
@@ -258,7 +259,13 @@ export default function Home() {
     {
       label: "Chocolatey",
       value: "chocolatey",
-      code: "choco install sparkle --version=2.13.0",
+      code: "choco install sparkle",
+    },
+    {
+      label: "Scoop",
+      value: "scoop",
+      code: `
+      scoop bucket add sparkle https://github.com/thedogecraft/sparkle && scoop install sparkle`,
     },
   ];
 
@@ -465,6 +472,12 @@ export default function Home() {
           >
             <CodeTabs tabs={installMethods} className="w-sm gap-0 mt-4 z-40!" />
           </motion.div>
+          <Link
+            href="/downloads"
+            className="text-muted-foreground text-sm mt-4 hover:text-primary transition-colors underline"
+          >
+            View all downloads
+          </Link>
 
           <div className="relative w-full max-w-5xl flex flex-col items-center justify-center">
             <motion.div

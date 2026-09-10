@@ -18,6 +18,7 @@ const navItems = [
   // { name: "Home", href: "/" },
   { name: "Debloat Script", href: "/debloat" },
   { name: "Apps", href: "/apps" },
+  { name: "Downloads", href: "/downloads" },
   { name: "Patch Notes", href: "/patch-notes" },
   { name: "Blog", href: "/blog" },
   { name: "Docs", href: "https://docs.getsparkle.net" },
