@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Fira_Code } from "next/font/google";
+import { Poppins, Fira_Code } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -7,8 +7,8 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 
-const jakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-jakarta-sans",
+const poppins = Poppins({
+  variable: "--font-poppins-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${jakartaSans.variable} ${firaCode.variable} antialiased`}
+        className={`${poppins.variable} ${firaCode.variable} antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider
