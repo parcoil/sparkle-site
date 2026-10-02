@@ -7,8 +7,8 @@
 		Network,
 		ChevronDown,
 		Star,
-		Zap,
-		Copy,
+		Box,
+		LayoutGrid,
 		Trash2,
 		Package,
 		Wrench,
@@ -82,55 +82,50 @@
 			description:
 				'Removes unnecessary Windows features and apps to free up resources and improve performance.',
 			icon: Star,
-			iconColor: 'text-teal-500',
-			categories: ['Performance', 'Privacy']
+			iconColor: 'text-teal-500'
 		},
 		{
-			title: 'System Optimization',
-			description: 'Enhance system performance and responsiveness with carefully selected tweaks.',
-			icon: Zap,
-			iconColor: 'text-pink-500',
-			categories: ['Performance']
+			title: 'Apply Tweaks',
+			description:
+				'Apply various tweaks to debloat windows, disable game bar, enable detailed bsod And more ',
+			icon: Wrench,
+			iconColor: 'text-pink-500'
 		},
 		{
 			title: 'Clean Temporary Files',
 			description: 'Remove temporary files, caches, and logs to free up valuable disk space.',
 			icon: Trash2,
-			iconColor: 'text-yellow-500',
-			categories: ['Maintenance']
+			iconColor: 'text-yellow-500'
 		},
 		{
 			title: 'Safe & Reversible',
 			description:
 				'All changes can be easily undone with system restore points or by reverting settings.',
 			icon: Shield,
-			iconColor: 'text-red-500',
-			categories: ['Security']
+			iconColor: 'text-red-500'
 		},
 		{
 			title: 'App Installer',
 			description:
 				'Quickly install your favorite applications using winget or chocolatey without leaving Sparkle.',
-			icon: Package,
-			iconColor: 'text-blue-500',
-			categories: ['Productivity']
+			icon: LayoutGrid,
+			iconColor: 'text-blue-500'
 		},
 		{
 			title: 'System Utilities',
 			description:
 				'Run essential system tools like SFC, Check Disk, and DISM from a simple, intuitive interface.',
-			icon: Wrench,
-			iconColor: 'text-green-500',
-			categories: ['Maintenance']
-		},
-		{
-			title: 'Network Optimizer',
-			description: 'Optimize your network settings and change DNS for improved speed and security.',
-			icon: Network,
-			iconColor: 'text-purple-500',
-			new: false,
-			categories: ['Performance', 'Networking']
+			icon: Box,
+			iconColor: 'text-green-500'
 		}
+		// {
+		//   title: 'Network Optimizer',
+		//   description:
+		//     'Optimize your network settings and change DNS for improved speed and security.',
+		//   icon: Network,
+		//   iconColor: 'text-purple-500',
+		//   new: false,
+		// },
 	];
 
 	const installMethods = [
@@ -142,7 +137,13 @@
 		{
 			label: 'Chocolatey',
 			value: 'chocolatey',
-			code: 'choco install sparkle --version=2.13.0'
+			code: 'choco install sparkle'
+		},
+		{
+			label: 'Scoop',
+			value: 'scoop',
+			code: `
+      scoop bucket add sparkle https://github.com/thedogecraft/sparkle && scoop install sparkle`
 		}
 	];
 
@@ -354,6 +355,13 @@
 
 		<CodeTabs tabs={installMethods} class="z-40! w-sm mt-4 gap-0" />
 
+		<a
+			href="/downloads"
+			class="mt-4 text-sm text-muted-foreground underline transition-colors hover:text-primary"
+		>
+			View all downloads
+		</a>
+
 		<div class="relative flex w-full max-w-5xl flex-col items-center justify-center">
 			<div
 				class="animate-fade-in-up absolute inset-0 -z-10 rounded-full bg-primary/30 blur-3xl dark:bg-accent/20"
@@ -377,45 +385,33 @@
 					</p>
 				</div>
 
-				<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				<div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 					{#each features as feature, i (feature.title)}
 						<Card.Root
-							class="animate-fade-in-up group relative overflow-hidden opacity-0 transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20"
+							class="animate-fade-in-up group relative flex h-full flex-col overflow-hidden opacity-0 transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20"
 							style="animation-delay: {0.5 + i * 0.1}s;"
 						>
-							<Card.Header>
+							<Card.Header class="pb-3">
 								{@const Icon = feature.icon}
 								<div
-									class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/40 text-primary transition-transform duration-300 group-hover:rotate-[-10deg]"
+									class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/40 text-primary transition-transform duration-300"
 								>
-									<Icon class="h-6 w-6 {feature.iconColor}" />
+									<Icon class="h-5 w-5 {feature.iconColor}" />
 								</div>
 								<div class="flex items-center gap-2">
-									<Card.Title class="text-lg font-semibold">{feature.title}</Card.Title>
-									{#if feature.new}
-										<span
-											class="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800"
-										>
-											New
-										</span>
-									{/if}
+									<Card.Title class="text-base font-semibold">{feature.title}</Card.Title>
 								</div>
-								<Card.Description class="mt-2 text-muted-foreground">
+								<Card.Description class="mt-2 text-xs text-muted-foreground">
 									{feature.description}
 								</Card.Description>
-								<div class="mt-4 flex flex-wrap gap-2">
-									{#each feature.categories as category (category)}
-										<span
-											class="inline-flex items-center rounded-full bg-accent/50 px-2.5 py-0.5 text-xs font-medium text-accent-foreground"
-										>
-											{category}
-										</span>
-									{/each}
-								</div>
 							</Card.Header>
 						</Card.Root>
 					{/each}
 				</div>
+
+				<p class="mt-3 mb-3 text-center text-sm font-medium text-muted-foreground">
+					With more features in the app
+				</p>
 			</div>
 
 			<!-- Ad Block 1 -->

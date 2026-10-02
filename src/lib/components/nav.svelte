@@ -9,25 +9,22 @@
 		X,
 		Download,
 		ChevronDown,
-		Github,
-		ExternalLink,
-		Trash2,
-		Grid2X2,
-		Home,
-		FileText
+		ExternalLink
 	} from '@lucide/svelte';
 	import ModeToggle from './modetoggle.svelte';
 	import Discord from './Discord.svelte';
+	import GithubIcon from './githubicon.svelte';
 
 	let mobileMenuOpen = $state(false);
 	let version = $state('');
 
 	const navItems = [
-		{ name: 'Home', href: '/', icon: Home },
-		{ name: 'Debloat Script', href: '/debloat', icon: Trash2 },
-		{ name: 'Apps', href: '/apps', icon: Grid2X2 },
-		{ name: 'Patch Notes', href: '/patch-notes', icon: FileText },
-		{ name: 'Docs', href: 'https://docs.getsparkle.net', icon: ExternalLink }
+		{ name: 'Debloat Script', href: '/debloat' },
+		{ name: 'Apps', href: '/apps' },
+		{ name: 'Downloads', href: '/downloads' },
+		{ name: 'Patch Notes', href: '/patch-notes' },
+		{ name: 'Blog', href: '/blog' },
+		{ name: 'Docs', href: 'https://docs.getsparkle.net' }
 	];
 
 	onMount(async () => {
@@ -77,16 +74,18 @@
 			</a>
 
 			<div class="ml-8 hidden items-center space-x-6 md:flex">
-				{#each navItems as item}
+				{#each navItems as item (item.name)}
+					{@const isExternalLink = !item.href.startsWith('/')}
 					<a
 						href={item.href}
-						class="flex items-center text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+						target={isExternalLink ? '_blank' : undefined}
+						rel={isExternalLink ? 'noopener noreferrer' : undefined}
+						class="flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
 					>
-						{#if item.icon}
-							{@const Icon = item.icon}
-							<Icon class="mr-2 h-4 w-4" />
+						<span>{item.name}</span>
+						{#if isExternalLink}
+							<ExternalLink class="h-3.5 w-3.5" />
 						{/if}
-						{item.name}
 					</a>
 				{/each}
 			</div>
@@ -108,7 +107,7 @@
 					class="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
 					aria-label="GitHub repository"
 				>
-					<Github class="h-5 w-5" />
+					<GithubIcon class="h-5 w-5" />
 				</a>
 				<ModeToggle />
 				<div class="hidden md:block">
@@ -155,7 +154,7 @@
 	{#if mobileMenuOpen}
 		<div class="border-t bg-background/95 backdrop-blur-lg md:hidden">
 			<div class="space-y-1 px-2 pt-2 pb-3">
-				{#each navItems as item}
+				{#each navItems as item (item.name)}
 					<a
 						href={item.href}
 						class="block rounded-md px-3 py-2 text-base font-medium text-foreground/80 hover:bg-accent/50 hover:text-foreground"
@@ -174,7 +173,7 @@
 							class="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
 							aria-label="GitHub repository"
 						>
-							<Github class="h-5 w-5" />
+							<GithubIcon class="h-5 w-5" />
 						</a>
 					</div>
 					<div class="flex items-center justify-between px-3 py-2">

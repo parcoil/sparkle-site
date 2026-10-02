@@ -16,6 +16,7 @@
 </script>
 
 <svelte:head>
+	<title>Sparkle Debloater</title>
 	<link rel="icon" href="/sparklelogo.png" />
 	<script
 		async

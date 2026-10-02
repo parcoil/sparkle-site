@@ -7,7 +7,7 @@
 
 	function parseMarkdown(text: string): string {
 		if (!text) return '';
-
+		text = text.replace(/^### Checksums[\s\S]*$/m, '');
 		let html = text
 			.replace(/^### (.*$)/gm, '<h4 class="text-base font-semibold mt-4 mb-2">$1</h4>')
 			.replace(/^## (.*$)/gm, '<h3 class="text-lg font-semibold mt-5 mb-2">$1</h3>')
@@ -16,9 +16,11 @@
 			.replace(/^\* (.*$)/gm, '<li class="ml-4 list-disc">$1</li>')
 			.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
 			.replace(/\*(.*?)\*/g, '<em>$1</em>')
-			.replace(/`([^`]+)`/g, '<code class="bg-muted px-1 py-0.5 rounded text-sm">$1</code>')
+			.replace(/`([^`]+)`/g, '<code class="bg-accent px-1 py-0.5 rounded text-sm">$1</code>')
+			.replace(/<img([^>]*?)>/gi, '<img$1 class="my-4 block max-w-full rounded-lg" />')
 			.replace(/\n\n/g, '</p><p class="mb-3">')
-			.replace(/\n(?=<li)/g, '\n');
+			.replace(/\n(?=<li)/g, '\n')
+			.replace('checksums', '');
 
 		html = '<p class="mb-3">' + html + '</p>';
 
@@ -58,7 +60,7 @@
 	<div class="mx-auto max-w-3xl">
 		<div class="mb-12 text-center">
 			<h1
-				class="animate-gradient mb-4 bg-gradient-to-r from-[#0096ff] to-[#0042ff] bg-clip-text pb-2 text-4xl font-bold text-transparent sm:text-5xl"
+				class="animate-gradient mb-4 bg-linear-to-r from-[#0096ff] to-[#0042ff] bg-clip-text pb-2 text-4xl font-bold text-transparent sm:text-5xl"
 			>
 				Patch Notes
 			</h1>
@@ -74,8 +76,10 @@
 		{:else}
 			<div class="space-y-8">
 				{#each data.releases as patch}
-					<Card.Root class="gap-0 overflow-hidden">
-						<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-4">
+					<Card.Root class="gap-2 overflow-hidden p-0 pb-6 pt-6">
+						<Card.Header
+							class="mb-0 flex flex-row items-center justify-between space-y-0 border-b"
+						>
 							<div class="flex items-center gap-3">
 								<Badge variant="default" class="text-sm">
 									v{patch.version}

@@ -7,5 +7,11 @@
 >
 	<p>a <a href="https://parcoil.com" class="text-primary hover:underline">parcoil</a> site</p>
 	<a href="mailto:info@parcoil.com" class="text-primary hover:underline">info@parcoil.com</a>
-	<span class="text-xs opacity-50">• {commit}</span>
+	<a
+		class="text-xs opacity-50 underline transition-all hover:opacity-100"
+		target="_blank"
+		href={`https://github.com/parcoil/sparkle-site/commit/${commit}`}
+	>
+		{commit}
+	</a>
 </footer>

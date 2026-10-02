@@ -64,7 +64,7 @@
 	{#each tabs as tab (tab.value)}
 		{#if activeTab === tab.value}
 			<div class="mt-0 rounded-b-lg border border-border bg-[hsl(var(--foreground)/0.03)] p-4">
-				<pre class="overflow-x-auto"><code class="font-mono text-sm text-foreground">{tab.code}</code></pre>
+				<pre class="overflow-x-auto"><code class="font-mono text-sm text-foreground">{tab.code.trim()}</code></pre>
 			</div>
 		{/if}
 	{/each}
