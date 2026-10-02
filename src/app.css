@@ -162,12 +162,22 @@
 		@apply bg-background text-foreground;
 	}
 }
-* {
-	scrollbar-color: var(--color-primary) transparent;
-}
 body {
 	margin: 0;
 	padding: 0;
+}
+
+html body[data-scroll-locked] {
+	overflow: visible !important;
+	margin-right: 0 !important;
+}
+
+html::-webkit-scrollbar {
+	display: none;
+}
+
+body {
+	scrollbar-width: none;
 }
 
 html,
@@ -263,4 +273,9 @@ body,
 }
 .stagger-7 {
 	animation-delay: 0.7s;
+}
+
+body::selection {
+	background-color: var(--accent);
+	color: var(--accent-foreground);
 }
