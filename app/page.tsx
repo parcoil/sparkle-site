@@ -472,12 +472,17 @@ export default function Home() {
           >
             <CodeTabs tabs={installMethods} className="w-sm gap-0 mt-4 z-40!" />
           </motion.div>
+          <motion.p   
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.3 }}>
           <Link
             href="/downloads"
             className="text-muted-foreground text-sm mt-4 hover:text-primary transition-colors underline"
           >
             View all downloads
           </Link>
+          </motion.p>
 
           <div className="relative w-full max-w-5xl flex flex-col items-center justify-center">
             <motion.div
