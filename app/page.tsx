@@ -90,58 +90,58 @@ const faqs = [
   },
 ];
 
-const features = [
-  {
-    title: "Debloat Windows",
-    description:
-      "Removes unnecessary Windows features and apps to free up resources and improve performance.",
-    icon: Star,
-    iconColor: "text-teal-500",
-  },
-  {
-    title: "Apply Tweaks",
-    description:
-      "Apply various tweaks to debloat windows, disable game bar, enable detailed bsod And more ",
-    icon: Wrench,
-    iconColor: "text-pink-500",
-  },
-  {
-    title: "Clean Temporary Files",
-    description:
-      "Remove temporary files, caches, and logs to free up valuable disk space.",
-    icon: Trash2,
-    iconColor: "text-yellow-500",
-  },
-  {
-    title: "Safe & Reversible",
-    description:
-      "All changes can be easily undone with system restore points or by reverting settings.",
-    icon: Shield,
-    iconColor: "text-red-500",
-  },
-  {
-    title: "App Installer",
-    description:
-      "Quickly install your favorite applications using winget or chocolatey without leaving Sparkle.",
-    icon: LayoutGrid,
-    iconColor: "text-blue-500",
-  },
-  {
-    title: "System Utilities",
-    description:
-      "Run essential system tools like SFC, Check Disk, and DISM from a simple, intuitive interface.",
-    icon: Box,
-    iconColor: "text-green-500",
-  },
-  // {
-  //   title: "Network Optimizer",
-  //   description:
-  //     "Optimize your network settings and change DNS for improved speed and security.",
-  //   icon: Network,
-  //   iconColor: "text-purple-500",
-  //   new: false,
-  // },
-];
+// const features = [
+//   {
+//     title: "Debloat Windows",
+//     description:
+//       "Removes unnecessary Windows features and apps to free up resources and improve performance.",
+//     icon: Star,
+//     iconColor: "text-teal-500",
+//   },
+//   {
+//     title: "Apply Tweaks",
+//     description:
+//       "Apply various tweaks to debloat windows, disable game bar, enable detailed bsod And more ",
+//     icon: Wrench,
+//     iconColor: "text-pink-500",
+//   },
+//   {
+//     title: "Clean Temporary Files",
+//     description:
+//       "Remove temporary files, caches, and logs to free up valuable disk space.",
+//     icon: Trash2,
+//     iconColor: "text-yellow-500",
+//   },
+//   {
+//     title: "Safe & Reversible",
+//     description:
+//       "All changes can be easily undone with system restore points or by reverting settings.",
+//     icon: Shield,
+//     iconColor: "text-red-500",
+//   },
+//   {
+//     title: "App Installer",
+//     description:
+//       "Quickly install your favorite applications using winget or chocolatey without leaving Sparkle.",
+//     icon: LayoutGrid,
+//     iconColor: "text-blue-500",
+//   },
+//   {
+//     title: "System Utilities",
+//     description:
+//       "Run essential system tools like SFC, Check Disk, and DISM from a simple, intuitive interface.",
+//     icon: Box,
+//     iconColor: "text-green-500",
+//   },
+//   // {
+//   //   title: "Network Optimizer",
+//   //   description:
+//   //     "Optimize your network settings and change DNS for improved speed and security.",
+//   //   icon: Network,
+//   //   iconColor: "text-purple-500",
+//   //   new: false,
+//   // },
+// ];
 
 // Animation variants
 const fadeInUp = {
@@ -472,16 +472,17 @@ export default function Home() {
           >
             <CodeTabs tabs={installMethods} className="w-sm gap-0 mt-4 z-40!" />
           </motion.div>
-          <motion.p   
+          <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.3 }}>
-          <Link
-            href="/downloads"
-            className="text-muted-foreground text-sm mt-4 hover:text-primary transition-colors underline"
+            transition={{ duration: 0.3, delay: 0.3 }}
           >
-            View all downloads
-          </Link>
+            <Link
+              href="/downloads"
+              className="text-muted-foreground text-sm mt-4 hover:text-primary transition-colors underline"
+            >
+              View all downloads
+            </Link>
           </motion.p>
 
           <div className="relative w-full max-w-5xl flex flex-col items-center justify-center">
@@ -503,7 +504,7 @@ export default function Home() {
           </div>
 
           <div className="w-full py-12">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            {/* <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -558,7 +559,7 @@ export default function Home() {
               <p className="text-center text-sm font-medium mt-3 mb-3 text-muted-foreground">
                 With more features in the app{" "}
               </p>
-            </div>
+            </div> */}
 
             <ins
               className="adsbygoogle"
@@ -574,6 +575,110 @@ export default function Home() {
                 __html: "(adsbygoogle = window.adsbygoogle || []).push({});",
               }}
             />
+
+            <h1 className="font-bold text-center text-3xl">Features</h1>
+            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
+              <div className="w-full md:w-1/2">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  Debloat Windows
+                </h1>
+                <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+                  Using Sparkle's Tweaks page you can debloat windows, remove
+                  telemetry and more
+                </p>
+              </div>
+              <img
+                src="/tweaks_page.png"
+                alt="Tweaks Page"
+                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
+              />
+            </section>
+
+            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
+              <img
+                src="/utilities_page.png"
+                alt="Utilities Page"
+                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
+              />
+              <div className="w-full md:w-1/2">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  Useful Utilities
+                </h1>
+                <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+                  Using Sparkle's Utilities page you can run system tools like
+                  SFC, Check Disk, and DISM from a simple interface.
+                </p>
+              </div>
+            </section>
+
+            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
+              <div className="w-full md:w-1/2">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  Clean Temporary Files
+                </h1>
+                <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+                  Using Sparkle's Cleaner page you can clean up temporary files,
+                  Windows update cache, and logs to free up disk space.
+                </p>
+              </div>
+              <img
+                src="/clean_page.png"
+                alt="Cleaner Page"
+                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
+              />
+            </section>
+
+            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
+              <img
+                src="/restore_page.png"
+                alt="Restore Page"
+                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
+              />
+              <div className="w-full md:w-1/2">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  Restore Your System
+                </h1>
+                <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+                  Using Sparkle's Restore page you can restore your system to a
+                  previous state, by either using a system restore point or by
+                  reverting applied Tweaks.
+                </p>
+              </div>
+            </section>
+
+            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
+              <div className="w-full md:w-1/2">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  DNS Changer
+                </h1>
+                <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+                  Using Sparkle's DNS Changer page you can change your system's
+                  DNS settings to improve browsing speed and security.
+                </p>
+              </div>
+              <img
+                src="/dns_page.png"
+                alt="DNS Page"
+                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
+              />
+            </section>
+
+            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
+              <img
+                src="/apps_page.png"
+                alt="Apps Page"
+                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
+              />
+              <div className="w-full md:w-1/2">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  Apps Installer
+                </h1>
+                <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+                  Using Sparkle's Apps Installer page you can easily install
+                  apps using either Winget or Chocolatey.
+                </p>
+              </div>
+            </section>
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <motion.div
