@@ -87,6 +87,16 @@ const staggerContainer = {
   },
 };
 
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0 },
+};
+
 export default function Home() {
   const [version, setVersion] = useState("");
   const [downloads, setDownloads] = useState("");
@@ -482,8 +492,24 @@ export default function Home() {
               }}
             />
 
-            <h1 className="font-bold text-center text-3xl">Features</h1>
-            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
+            <motion.h1
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeInUp}
+              transition={{ duration: 0.35 }}
+              className="font-bold text-center text-3xl"
+            >
+              Features
+            </motion.h1>
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeInLeft}
+              transition={{ duration: 0.4 }}
+              className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8"
+            >
               <div className="w-full md:w-1/2">
                 <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   Debloat Windows
@@ -493,20 +519,46 @@ export default function Home() {
                   telemetry and more
                 </p>
               </div>
-              <img
+              <motion.img
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInRight}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                whileHover={{ scale: 1.02 }}
                 src="/tweaks_page.png"
                 alt="Tweaks Page"
                 className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
               />
-            </section>
+            </motion.section>
 
-            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
-              <img
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeInRight}
+              transition={{ duration: 0.4 }}
+              className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8"
+            >
+              <motion.img
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInLeft}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                whileHover={{ scale: 1.02 }}
                 src="/utilities_page.png"
                 alt="Utilities Page"
                 className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
               />
-              <div className="w-full md:w-1/2">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInRight}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                className="w-full md:w-1/2"
+              >
                 <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   Useful Utilities
                 </h1>
@@ -514,11 +566,25 @@ export default function Home() {
                   Using Sparkle's Utilities page you can run system tools like
                   SFC, Check Disk, and DISM from a simple interface.
                 </p>
-              </div>
-            </section>
+              </motion.div>
+            </motion.section>
 
-            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
-              <div className="w-full md:w-1/2">
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeInLeft}
+              transition={{ duration: 0.4 }}
+              className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8"
+            >
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInLeft}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                className="w-full md:w-1/2"
+              >
                 <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   Clean Temporary Files
                 </h1>
@@ -526,21 +592,47 @@ export default function Home() {
                   Using Sparkle's Cleaner page you can clean up temporary files,
                   Windows update cache, and logs to free up disk space.
                 </p>
-              </div>
-              <img
+              </motion.div>
+              <motion.img
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInRight}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                whileHover={{ scale: 1.02 }}
                 src="/clean_page.png"
                 alt="Cleaner Page"
                 className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
               />
-            </section>
+            </motion.section>
 
-            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
-              <img
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeInRight}
+              transition={{ duration: 0.4 }}
+              className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8"
+            >
+              <motion.img
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInLeft}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                whileHover={{ scale: 1.02 }}
                 src="/restore_page.png"
                 alt="Restore Page"
                 className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
               />
-              <div className="w-full md:w-1/2">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInRight}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                className="w-full md:w-1/2"
+              >
                 <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   Restore Your System
                 </h1>
@@ -549,11 +641,25 @@ export default function Home() {
                   previous state, by either using a system restore point or by
                   reverting applied Tweaks.
                 </p>
-              </div>
-            </section>
+              </motion.div>
+            </motion.section>
 
-            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
-              <div className="w-full md:w-1/2">
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeInLeft}
+              transition={{ duration: 0.4 }}
+              className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8"
+            >
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInLeft}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                className="w-full md:w-1/2"
+              >
                 <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   DNS Changer
                 </h1>
@@ -561,21 +667,47 @@ export default function Home() {
                   Using Sparkle's DNS Changer page you can change your system's
                   DNS settings to improve browsing speed and security.
                 </p>
-              </div>
-              <img
+              </motion.div>
+              <motion.img
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInRight}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                whileHover={{ scale: 1.02 }}
                 src="/dns_page.png"
                 alt="DNS Page"
                 className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
               />
-            </section>
+            </motion.section>
 
-            <section className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8">
-              <img
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeInRight}
+              transition={{ duration: 0.4 }}
+              className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8"
+            >
+              <motion.img
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInLeft}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                whileHover={{ scale: 1.02 }}
                 src="/apps_page.png"
                 alt="Apps Page"
                 className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
               />
-              <div className="w-full md:w-1/2">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeInRight}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                className="w-full md:w-1/2"
+              >
                 <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   Apps Installer
                 </h1>
@@ -583,8 +715,8 @@ export default function Home() {
                   Using Sparkle's Apps Installer page you can easily install
                   apps using either Winget or Chocolatey.
                 </p>
-              </div>
-            </section>
+              </motion.div>
+            </motion.section>
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <motion.div
