@@ -2,27 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  Download,
-  Shield,
-  Github,
-  Network,
-  ChevronDown,
-  Star,
-  Box,
-  LayoutGrid,
-  Trash2,
-  Package,
-  Wrench,
-  ArrowRight,
-} from "lucide-react";
+import { Download, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -31,7 +13,6 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Alert, AlertTitle } from "@/components/ui/alert";
-import { Toaster, toast } from "sonner";
 import Script from "next/script";
 import {
   Accordion,
@@ -42,6 +23,7 @@ import {
 import { CodeTabs } from "@/components/code-tabs";
 import ReactLenis from "lenis/react";
 import Link from "next/link";
+import GithubIcon from "@/components/githubicon";
 
 const faqs = [
   {
@@ -90,68 +72,9 @@ const faqs = [
   },
 ];
 
-// const features = [
-//   {
-//     title: "Debloat Windows",
-//     description:
-//       "Removes unnecessary Windows features and apps to free up resources and improve performance.",
-//     icon: Star,
-//     iconColor: "text-teal-500",
-//   },
-//   {
-//     title: "Apply Tweaks",
-//     description:
-//       "Apply various tweaks to debloat windows, disable game bar, enable detailed bsod And more ",
-//     icon: Wrench,
-//     iconColor: "text-pink-500",
-//   },
-//   {
-//     title: "Clean Temporary Files",
-//     description:
-//       "Remove temporary files, caches, and logs to free up valuable disk space.",
-//     icon: Trash2,
-//     iconColor: "text-yellow-500",
-//   },
-//   {
-//     title: "Safe & Reversible",
-//     description:
-//       "All changes can be easily undone with system restore points or by reverting settings.",
-//     icon: Shield,
-//     iconColor: "text-red-500",
-//   },
-//   {
-//     title: "App Installer",
-//     description:
-//       "Quickly install your favorite applications using winget or chocolatey without leaving Sparkle.",
-//     icon: LayoutGrid,
-//     iconColor: "text-blue-500",
-//   },
-//   {
-//     title: "System Utilities",
-//     description:
-//       "Run essential system tools like SFC, Check Disk, and DISM from a simple, intuitive interface.",
-//     icon: Box,
-//     iconColor: "text-green-500",
-//   },
-//   // {
-//   //   title: "Network Optimizer",
-//   //   description:
-//   //     "Optimize your network settings and change DNS for improved speed and security.",
-//   //   icon: Network,
-//   //   iconColor: "text-purple-500",
-//   //   new: false,
-//   // },
-// ];
-
-// Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
-};
-
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
 };
 
 const staggerContainer = {
@@ -160,19 +83,6 @@ const staggerContainer = {
     opacity: 1,
     transition: {
       staggerChildren: 0.06,
-    },
-  },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 20,
     },
   },
 };
@@ -239,12 +149,6 @@ export default function Home() {
     });
     setDownloads(totalDownloads.toLocaleString("en-US"));
   }
-
-  const copyCommand = () => {
-    const command = "irm https://getsparkle.net/get | iex";
-    navigator.clipboard.writeText(command);
-    toast.success("Copied to clipboard");
-  };
 
   const replayLogoAnimation = () => {
     setLogoKey((prev) => prev + 1);
@@ -416,7 +320,9 @@ export default function Home() {
               </DropdownMenu>
             </motion.div>
 
-            {/* <a
+            <motion.a
+              variants={fadeInUp}
+              transition={{ duration: 0.3, delay: 0.12 }}
               href="https://github.com/Parcoil/Sparkle"
               className="w-full sm:w-auto"
             >
@@ -424,10 +330,10 @@ export default function Home() {
                 variant="outline"
                 className="w-full justify-center sm:w-auto"
               >
-                <Github className="mr-2 h-4 w-4" />
+                <GithubIcon className="mr-2 h-4 w-4" />
                 View on GitHub
               </Button>
-            </a> */}
+            </motion.a>
           </motion.div>
 
           {/* <div className="group relative mt-4 hidden w-full sm:mt-6 sm:flex sm:max-w-md">
