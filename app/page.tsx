@@ -332,7 +332,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <motion.p
+          {/* <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.24 }}
@@ -347,15 +347,16 @@ export default function Home() {
             transition={{ duration: 0.3, delay: 0.3 }}
           >
             <CodeTabs tabs={installMethods} className="w-sm gap-0 mt-4 z-40!" />
-          </motion.div>
+          </motion.div> */}
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.3 }}
+            className="mt-4"
           >
             <Link
               href="/downloads"
-              className="text-muted-foreground text-sm mt-4 hover:text-primary transition-colors underline"
+              className="text-muted-foreground text-sm hover:text-primary transition-colors underline"
             >
               View all downloads
             </Link>
