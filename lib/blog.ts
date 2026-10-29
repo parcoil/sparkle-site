@@ -34,7 +34,9 @@ export function getAllPosts(): BlogPost[] {
     .filter((file) => file.endsWith(".md"))
     .map((file) => {
       const slug = file.replace(/\.md$/, "");
-      const raw = fs.readFileSync(path.join(BLOG_DIR, file), "utf-8").replace(/\r\n/g, "\n");
+      const raw = fs
+        .readFileSync(path.join(BLOG_DIR, file), "utf-8")
+        .replace(/\r\n/g, "\n");
       const post: BlogPost = {
         slug,
         title: "",
@@ -127,12 +129,12 @@ function renderInline(text: string): string {
 export function renderMarkdown(markdown: string): string {
   const lines = markdown.split("\n");
   const html: string[] = [];
-  let listOpen = false;
+  let listType: "ul" | "ol" | null = null;
 
   const closeList = () => {
-    if (listOpen) {
-      html.push("</ul>");
-      listOpen = false;
+    if (listType) {
+      html.push(`</${listType}>`);
+      listType = null;
     }
   };
 
@@ -154,15 +156,36 @@ export function renderMarkdown(markdown: string): string {
       html.push(
         `<h2 class="mb-3 mt-8 text-2xl font-bold">${renderInline(trimmedEnd.slice(3))}</h2>`,
       );
+    } else if (trimmedEnd.startsWith("# ")) {
+      closeList();
+      html.push(
+        `<h1 class="mb-4 mt-8 text-3xl font-bold">${renderInline(trimmedEnd.slice(2))}</h1>`,
+      );
     } else if (trimmedEnd.startsWith("- ")) {
-      if (!listOpen) {
+      if (listType !== "ul") {
+        closeList();
         html.push('<ul class="my-3 ml-5 list-disc space-y-1">');
-        listOpen = true;
+        listType = "ul";
       }
       html.push(`<li>${renderInline(trimmedEnd.slice(2))}</li>`);
     } else {
-      closeList();
-      html.push(`<p class="mb-4 leading-relaxed">${renderInline(trimmedEnd)}</p>`);
+      const ordered = trimmedEnd.match(/^(\d+)\.\s+(.*)$/);
+
+      if (ordered) {
+        if (listType !== "ol") {
+          closeList();
+          html.push(
+            `<ol start="${ordered[1]}" class="my-3 ml-5 list-decimal space-y-1">`,
+          );
+          listType = "ol";
+        }
+        html.push(`<li>${renderInline(ordered[2])}</li>`);
+      } else {
+        closeList();
+        html.push(
+          `<p class="mb-4 leading-relaxed">${renderInline(trimmedEnd)}</p>`,
+        );
+      }
     }
   }
 
