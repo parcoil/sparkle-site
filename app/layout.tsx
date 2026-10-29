@@ -3,9 +3,11 @@ import { Poppins, Fira_Code } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ReleaseProvider } from "@/components/release-provider";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
+import { getReleaseInfo } from "@/lib/releases";
 
 const poppins = Poppins({
   variable: "--font-poppins-sans",
@@ -23,11 +25,13 @@ export const metadata: Metadata = {
   description: "A Windows app to debloat and optimize your PC",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const releaseInfo = await getReleaseInfo();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -40,10 +44,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Nav />
-          <div className="min-h-screen pt-16">{children}</div>
-          <Toaster />
-          <Footer />
+          <ReleaseProvider value={releaseInfo}>
+            <Nav />
+            <div className="min-h-screen pt-16">{children}</div>
+            <Toaster />
+            <Footer />
+          </ReleaseProvider>
         </ThemeProvider>
         <Script
           defer

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Download, ChevronDown, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,37 +10,17 @@ import {
 	DropdownMenuGroup,
 	DropdownMenuItem
 } from '@/components/ui/dropdown-menu';
+import { useRelease } from '@/components/release-provider';
 
 export default function ErrorPage() {
-	const [version, setVersion] = useState('');
-
-	useEffect(() => {
-		async function fetchVersion() {
-			try {
-				const response = await fetch(
-					'https://api.github.com/repos/parcoil/sparkle/releases/latest'
-				);
-				const data = await response.json();
-				setVersion(data.tag_name);
-			} catch (error) {
-				console.error('Failed to fetch version:', error);
-			}
-		}
-		fetchVersion();
-	}, []);
+	const { exeUrl, zipUrl } = useRelease();
 
 	function handleDownload(type: 'exe' | 'zip') {
-		if (type === 'exe') {
-			window.open(
-				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`,
-				'_blank'
-			);
-		} else {
-			window.open(
-				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-win.zip`,
-				'_blank'
-			);
-		}
+		window.open(
+			type === 'exe' ? exeUrl : zipUrl,
+			'_blank',
+			'noopener,noreferrer'
+		);
 	}
 
 	return (

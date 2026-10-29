@@ -24,6 +24,7 @@ import { CodeTabs } from "@/components/code-tabs";
 import ReactLenis from "lenis/react";
 import Link from "next/link";
 import GithubIcon from "@/components/githubicon";
+import { useRelease } from "@/components/release-provider";
 
 const faqs = [
   {
@@ -98,66 +99,25 @@ const fadeInRight = {
 };
 
 export default function Home() {
-  const [version, setVersion] = useState("");
-  const [downloads, setDownloads] = useState("");
-  const [showMovedAlert, setShowMovedAlert] = useState(false);
+  const { version, downloads, exeUrl, zipUrl } = useRelease();
   const [searchParams, setSearchParams] = useState<URLSearchParams | null>(
     null,
   );
   const [logoKey, setLogoKey] = useState(0);
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      setSearchParams(params);
-      if (params.get("ref") === "parcoil-sparkle-page") {
-        setShowMovedAlert(true);
-      }
-
-      fetchVersion();
-      fetchDownloads();
+      setSearchParams(new URLSearchParams(window.location.search));
     }
   }, []);
 
   function handleDownload(type: "exe" | "zip") {
     if (typeof window !== "undefined") {
-      if (type === "exe") {
-        window.open(
-          `https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace("v", "")}-setup.exe`,
-          "_blank",
-        );
-      } else {
-        window.open(
-          `https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace("v", "")}-win.zip`,
-          "_blank",
-        );
-      }
+      window.open(
+        type === "exe" ? exeUrl : zipUrl,
+        "_blank",
+        "noopener,noreferrer",
+      );
     }
-  }
-
-  function fetchVersion() {
-    fetch("https://api.github.com/repos/parcoil/sparkle/releases/latest")
-      .then((res) => res.json())
-      .then((data) => {
-        setVersion(data.tag_name);
-      });
-  }
-
-  async function fetchDownloads() {
-    const releases = await (
-      await fetch("https://api.github.com/repos/parcoil/sparkle/releases")
-    ).json();
-    let totalDownloads = 0;
-    releases.forEach((release: any) => {
-      const version = release.tag_name;
-      if (version && version >= "2.0.0") {
-        release.assets.forEach((asset: any) => {
-          if (asset.name.endsWith(".exe") || asset.name.endsWith(".zip")) {
-            totalDownloads += asset.download_count || 0;
-          }
-        });
-      }
-    });
-    setDownloads(totalDownloads.toLocaleString("en-US"));
   }
 
   const replayLogoAnimation = () => {

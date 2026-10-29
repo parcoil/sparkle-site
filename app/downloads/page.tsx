@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Download, Github } from "lucide-react";
+import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,55 +11,17 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { CodeTabs } from "@/components/code-tabs";
 import GithubIcon from "@/components/githubicon";
+import { useRelease } from "@/components/release-provider";
 
 export default function DownloadsPage() {
-  const [version, setVersion] = useState("");
-  const [downloads, setDownloads] = useState("");
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch(
-          "https://api.github.com/repos/parcoil/sparkle/releases/latest",
-        );
-        const data = await res.json();
-        setVersion(data.tag_name);
-
-        const releasesRes = await fetch(
-          "https://api.github.com/repos/parcoil/sparkle/releases",
-        );
-        const releases = await releasesRes.json();
-        let total = 0;
-        releases.forEach((release: any) => {
-          const v = release.tag_name;
-          if (v && v >= "2.0.0") {
-            release.assets.forEach((asset: any) => {
-              if (asset.name.endsWith(".exe") || asset.name.endsWith(".zip")) {
-                total += asset.download_count || 0;
-              }
-            });
-          }
-        });
-        setDownloads(total.toLocaleString("en-US"));
-      } catch {
-        console.error("Failed to fetch release data");
-      }
-    }
-    fetchData();
-  }, []);
+  const { version, downloads, exeUrl, zipUrl } = useRelease();
 
   function handleDownload(type: "exe" | "zip") {
-    if (type === "exe") {
-      window.open(
-        `https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace("v", "")}-setup.exe`,
-        "_blank",
-      );
-    } else {
-      window.open(
-        `https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace("v", "")}-win.zip`,
-        "_blank",
-      );
-    }
+    window.open(
+      type === "exe" ? exeUrl : zipUrl,
+      "_blank",
+      "noopener,noreferrer",
+    );
   }
 
   const installMethods = [
