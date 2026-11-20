@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Poppins, Fira_Code } from "next/font/google";
 import Script from "next/script";
+import { connection } from "next/server";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ReleaseProvider } from "@/components/release-provider";
+import MaintenancePage from "@/components/maintenance-page";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
+import { isMaintenanceMode } from "@/lib/maintenance";
 import { getReleaseInfo } from "@/lib/releases";
 
 const poppins = Poppins({
@@ -20,24 +23,55 @@ const firaCode = Fira_Code({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Sparkle Debloater",
-  description: "A Windows app to debloat and optimize your PC",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  if (isMaintenanceMode()) {
+    return {
+      title: "Under Maintenance | Sparkle Debloater",
+      description:
+        "Sparkle is under maintenance. Download the latest version from GitHub.",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  return {
+    title: "Sparkle Debloater",
+    description: "A Windows app to debloat and optimize your PC",
+  };
+}
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Opt into per-request rendering so MAT can be flipped at runtime without
+  // rebuilding the site (important for the Docker deployment).
+  await connection();
+
+  const bodyClassName = `${poppins.variable} ${firaCode.variable} antialiased`;
+
+  if (isMaintenanceMode()) {
+    return (
+      <html lang="en" suppressHydrationWarning>
+        <body className={bodyClassName} suppressHydrationWarning>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <MaintenancePage />
+          </ThemeProvider>
+        </body>
+      </html>
+    );
+  }
+
   const releaseInfo = await getReleaseInfo();
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${poppins.variable} ${firaCode.variable} antialiased`}
-        suppressHydrationWarning
-      >
+      <body className={bodyClassName} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
