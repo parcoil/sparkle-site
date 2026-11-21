@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Download, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GithubIcon from "@/components/githubicon";
@@ -10,12 +9,11 @@ export default function MaintenancePage() {
   return (
     <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
       <div className="flex w-full max-w-xl flex-col items-center text-center">
-        <Image
+        <img
           src="/sparklelogo.png"
           alt="Sparkle Logo"
           width={96}
           height={96}
-          unoptimized
           className="mb-6 h-24 w-24"
         />
 

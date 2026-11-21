@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import {
   Menu,
   X,
   Download,
   ChevronDown,
-  Github,
   ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,6 +29,9 @@ const navItems = [
   { name: "Downloads", href: "/downloads" },
   { name: "Patch Notes", href: "/patch-notes" },
   { name: "Blog", href: "/blog" },
+] as const;
+
+const externalNavItems = [
   { name: "Docs", href: "https://docs.getsparkle.net" },
 ];
 
@@ -68,7 +70,7 @@ export default function Nav() {
     >
       <nav aria-label="Top">
         <div className="flex h-16 items-center">
-          <Link href="/" className="flex items-center space-x-2 shrink-0">
+          <Link to="/" className="flex items-center space-x-2 shrink-0">
             <img
               src="/sparklelogo.png"
               alt="Sparkle Logo"
@@ -80,22 +82,27 @@ export default function Nav() {
           </Link>
 
           <div className="hidden items-center space-x-6 ml-8 md:flex">
-            {navItems.map((item) => {
-              const isExternalLink = !item.href.startsWith("/");
-
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  target={isExternalLink ? "_blank" : undefined}
-                  rel={isExternalLink ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
-                >
-                  <span>{item.name}</span>
-                  {isExternalLink && <ExternalLink className="h-3.5 w-3.5" />}
-                </Link>
-              );
-            })}
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+              >
+                <span>{item.name}</span>
+              </Link>
+            ))}
+            {externalNavItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+              >
+                <span>{item.name}</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            ))}
           </div>
 
           <div className="flex items-center space-x-2 ml-auto shrink-0">
@@ -165,12 +172,25 @@ export default function Nav() {
             {navItems.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className="block rounded-md px-3 py-2 text-base font-medium text-foreground/80 hover:bg-accent/50 hover:text-foreground"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
+            ))}
+            {externalNavItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 rounded-md px-3 py-2 text-base font-medium text-foreground/80 hover:bg-accent/50 hover:text-foreground"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
             ))}
             <div className="space-y-2 px-3 py-2">
               <div className="flex items-center justify-between px-3 py-2">

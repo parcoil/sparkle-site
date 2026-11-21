@@ -1,5 +1,7 @@
 node_modules
-.next
+.output
+.nitro
+.tanstack
 .env
 .env.local
 .env.*.local
@@ -11,11 +13,9 @@ yarn-error.log*
 Thumbs.db
 .vercel
 .netlify
-.svelte-kit
 build
 dist
 coverage
 .vscode
 .idea
 *.tsbuildinfo
-.next-env.d.ts

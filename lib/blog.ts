@@ -1,111 +1,108 @@
-import fs from "fs";
-import path from "path";
-
 export type BlogPost = {
-  slug: string;
-  title: string;
-  date: string;
-  description: string;
-  author: string;
-  cover: string | null;
-  topics: string[];
-  content: string;
-};
+  slug: string
+  title: string
+  date: string
+  description: string
+  author: string
+  cover: string | null
+  topics: string[]
+  content: string
+}
 
-const BLOG_DIR = path.join(process.cwd(), "blog");
+// Vite bundles the markdown files into the app, so no runtime filesystem
+// access is needed (the old Next.js version read the `blog/` folder with fs).
+const markdownFiles = import.meta.glob('../blog/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>
 
 function parseValue(value: string): string | string[] {
-  value = value.trim();
-  if (value.startsWith("[") && value.endsWith("]")) {
-    const inner = value.slice(1, -1).trim();
+  value = value.trim()
+  if (value.startsWith('[') && value.endsWith(']')) {
+    const inner = value.slice(1, -1).trim()
     return inner
       ? inner
-          .split(",")
-          .map((item) => item.trim().replace(/^["']|["']$/g, ""))
+          .split(',')
+          .map((item) => item.trim().replace(/^["']|["']$/g, ''))
           .filter(Boolean)
-      : [];
+      : []
   }
-  return value.replace(/^["']|["']$/g, "");
+  return value.replace(/^["']|["']$/g, '')
 }
 
 export function getAllPosts(): BlogPost[] {
-  const posts = fs
-    .readdirSync(BLOG_DIR)
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => {
-      const slug = file.replace(/\.md$/, "");
-      const raw = fs
-        .readFileSync(path.join(BLOG_DIR, file), "utf-8")
-        .replace(/\r\n/g, "\n");
+  return Object.entries(markdownFiles)
+    .map(([filePath, raw]) => {
+      const slug = filePath.split('/').pop()!.replace(/\.md$/, '')
+      const normalized = raw.replace(/\r\n/g, '\n')
       const post: BlogPost = {
         slug,
-        title: "",
-        date: "",
-        description: "",
-        author: "",
+        title: '',
+        date: '',
+        description: '',
+        author: '',
         cover: null,
         topics: [],
-        content: raw.trim(),
-      };
-
-      const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-      if (match) {
-        const [, frontmatter, content] = match;
-        for (const line of frontmatter.split("\n")) {
-          const idx = line.indexOf(":");
-          if (idx === -1) continue;
-          const key = line.slice(0, idx).trim();
-          const value = parseValue(line.slice(idx + 1));
-          switch (key) {
-            case "title":
-              post.title = String(value);
-              break;
-            case "date":
-              post.date = String(value);
-              break;
-            case "description":
-              post.description = String(value);
-              break;
-            case "author":
-              post.author = String(value);
-              break;
-            case "cover":
-              post.cover = String(value);
-              break;
-            case "topics":
-              post.topics = Array.isArray(value) ? value : [value];
-              break;
-          }
-        }
-        post.content = content.trim();
+        content: normalized.trim(),
       }
 
-      return post;
-    })
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+      const match = normalized.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
+      if (match) {
+        const [, frontmatter, content] = match
+        for (const line of frontmatter.split('\n')) {
+          const idx = line.indexOf(':')
+          if (idx === -1) continue
+          const key = line.slice(0, idx).trim()
+          const value = parseValue(line.slice(idx + 1))
+          switch (key) {
+            case 'title':
+              post.title = String(value)
+              break
+            case 'date':
+              post.date = String(value)
+              break
+            case 'description':
+              post.description = String(value)
+              break
+            case 'author':
+              post.author = String(value)
+              break
+            case 'cover':
+              post.cover = String(value)
+              break
+            case 'topics':
+              post.topics = Array.isArray(value) ? value : [value]
+              break
+          }
+        }
+        post.content = content.trim()
+      }
 
-  return posts;
+      return post
+    })
+    .sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return getAllPosts().find((post) => post.slug === slug);
+  return getAllPosts().find((post) => post.slug === slug)
 }
 
 export function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    timeZone: "UTC",
-  });
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  })
 }
 
 export function getGithubProfileUrl(username: string): string {
-  return `https://github.com/${username}`;
+  return `https://github.com/${username}`
 }
 
 export function getGithubAvatarUrl(username: string): string {
-  return `https://github.com/${username}.png?size=64`;
+  return `https://github.com/${username}.png?size=64`
 }
 
 function renderInline(text: string): string {
@@ -118,77 +115,77 @@ function renderInline(text: string): string {
       /\[([^\]]+)\]\(([^)]+)\)/g,
       '<a href="$2" target="_blank" rel="noopener noreferrer" class="font-medium text-primary hover:underline">$1</a>',
     )
-    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-    .replace(/\*([^*\n]+)\*/g, "<em>$1</em>")
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
     .replace(
       /`([^`]+)`/g,
       '<code class="rounded bg-accent px-1 py-0.5 font-mono text-sm">$1</code>',
-    );
+    )
 }
 
 export function renderMarkdown(markdown: string): string {
-  const lines = markdown.split("\n");
-  const html: string[] = [];
-  let listType: "ul" | "ol" | null = null;
+  const lines = markdown.split('\n')
+  const html: string[] = []
+  let listType: 'ul' | 'ol' | null = null
 
   const closeList = () => {
     if (listType) {
-      html.push(`</${listType}>`);
-      listType = null;
+      html.push(`</${listType}>`)
+      listType = null
     }
-  };
+  }
 
   for (const line of lines) {
-    const trimmedEnd = line.replace(/\s+$/, "");
+    const trimmedEnd = line.replace(/\s+$/, '')
 
     if (!trimmedEnd.trim()) {
-      closeList();
-      continue;
+      closeList()
+      continue
     }
 
-    if (trimmedEnd.startsWith("### ")) {
-      closeList();
+    if (trimmedEnd.startsWith('### ')) {
+      closeList()
       html.push(
         `<h3 class="mb-2 mt-6 text-lg font-semibold">${renderInline(trimmedEnd.slice(4))}</h3>`,
-      );
-    } else if (trimmedEnd.startsWith("## ")) {
-      closeList();
+      )
+    } else if (trimmedEnd.startsWith('## ')) {
+      closeList()
       html.push(
         `<h2 class="mb-3 mt-8 text-2xl font-bold">${renderInline(trimmedEnd.slice(3))}</h2>`,
-      );
-    } else if (trimmedEnd.startsWith("# ")) {
-      closeList();
+      )
+    } else if (trimmedEnd.startsWith('# ')) {
+      closeList()
       html.push(
         `<h1 class="mb-4 mt-8 text-3xl font-bold">${renderInline(trimmedEnd.slice(2))}</h1>`,
-      );
-    } else if (trimmedEnd.startsWith("- ")) {
-      if (listType !== "ul") {
-        closeList();
-        html.push('<ul class="my-3 ml-5 list-disc space-y-1">');
-        listType = "ul";
+      )
+    } else if (trimmedEnd.startsWith('- ')) {
+      if (listType !== 'ul') {
+        closeList()
+        html.push('<ul class="my-3 ml-5 list-disc space-y-1">')
+        listType = 'ul'
       }
-      html.push(`<li>${renderInline(trimmedEnd.slice(2))}</li>`);
+      html.push(`<li>${renderInline(trimmedEnd.slice(2))}</li>`)
     } else {
-      const ordered = trimmedEnd.match(/^(\d+)\.\s+(.*)$/);
+      const ordered = trimmedEnd.match(/^(\d+)\.\s+(.*)$/)
 
       if (ordered) {
-        if (listType !== "ol") {
-          closeList();
+        if (listType !== 'ol') {
+          closeList()
           html.push(
             `<ol start="${ordered[1]}" class="my-3 ml-5 list-decimal space-y-1">`,
-          );
-          listType = "ol";
+          )
+          listType = 'ol'
         }
-        html.push(`<li>${renderInline(ordered[2])}</li>`);
+        html.push(`<li>${renderInline(ordered[2])}</li>`)
       } else {
-        closeList();
+        closeList()
         html.push(
           `<p class="mb-4 leading-relaxed">${renderInline(trimmedEnd)}</p>`,
-        );
+        )
       }
     }
   }
 
-  closeList();
-  return html.join("\n");
+  closeList()
+  return html.join('\n')
 }
