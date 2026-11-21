@@ -33,7 +33,7 @@ const navItems = [
   { name: "Docs", href: "https://docs.getsparkle.net" },
 ];
 
-function DiscordIcon({ className }: { className?: string }) {
+export function DiscordIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}
