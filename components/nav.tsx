@@ -132,27 +132,13 @@ export default function Nav() {
             </a>
             <ModeToggle />
             <div className="hidden md:block">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button>
-                    <Download className="mr-2 h-4 w-4" />
-                    Download
-                    <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-48" align="end">
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={() => handleDownload("exe")}>
-                      <Download className="mr-2 h-4 w-4" />
-                      <span>Installer (.exe)</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleDownload("zip")}>
-                      <Download className="mr-2 h-4 w-4" />
-                      <span>Portable (.zip)</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <Link
+                href="/downloads"
+                className={buttonVariants({ variant: "default" })}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download
+              </Link>
             </div>
           </div>
 
