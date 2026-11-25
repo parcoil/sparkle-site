@@ -9,8 +9,9 @@ import {
   ChevronDown,
   Github,
   ExternalLink,
+  Star,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -50,7 +51,7 @@ export function DiscordIcon({ className }: { className?: string }) {
 
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { exeUrl, zipUrl } = useRelease();
+  const { exeUrl, zipUrl, stars } = useRelease();
 
   function handleDownload(type: "exe" | "zip") {
     window.open(
@@ -63,11 +64,11 @@ export default function Nav() {
   return (
     <header
       className={cn(
-        "fixed top-4 left-1/2 z-50 w-full max-w-6xl -translate-x-1/2 rounded-2xl px-4 sm:px-6 lg:px-8 transition-all duration-300 border bg-background/80 shadow-lg backdrop-blur-md",
+        "fixed top-4 left-1/2 z-50 w-full max-w-6xl -translate-x-1/2 rounded-2xl px-3 sm:px-4 lg:px-5 transition-all duration-300 border bg-background/80 shadow-lg backdrop-blur-md",
       )}
     >
       <nav aria-label="Top">
-        <div className="flex h-16 items-center">
+        <div className="flex h-14 items-center">
           <Link href="/" className="flex items-center space-x-2 shrink-0">
             <img
               src="/sparklelogo.png"
@@ -79,7 +80,7 @@ export default function Nav() {
             </span>
           </Link>
 
-          <div className="hidden items-center space-x-6 ml-8 md:flex">
+          <div className="hidden items-center space-x-4 ml-6 md:flex">
             {navItems.map((item) => {
               const isExternalLink = !item.href.startsWith("/");
 
@@ -103,19 +104,31 @@ export default function Nav() {
               href="https://dsc.gg/parcoil"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+              className={buttonVariants({ variant: "outline" })}
               aria-label="Discord Server"
             >
-              <DiscordIcon className="h-5 w-5" />
+              <DiscordIcon className="h-5 w-5" /> Discord
             </a>
             <a
               href="https://github.com/Parcoil/Sparkle"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
-              aria-label="GitHub repository"
+              className={buttonVariants({ variant: "outline" })}
+              aria-label={
+                stars !== null
+                  ? `GitHub repository, ${stars.toLocaleString("en-US")} stars`
+                  : "GitHub repository"
+              }
             >
-              <GithubIcon className="h-5 w-5" />
+              <GithubIcon className="h-5 w-5" /> Github
+              {stars !== null && (
+                <>
+                  <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                  <span className="text-xs font-medium tabular-nums text-muted-foreground">
+                    {stars.toLocaleString("en-US")}
+                  </span>{" "}
+                </>
+              )}
             </a>
             <ModeToggle />
             <div className="hidden md:block">
@@ -174,13 +187,24 @@ export default function Nav() {
             ))}
             <div className="space-y-2 px-3 py-2">
               <div className="flex items-center justify-between px-3 py-2">
-                <span className="text-sm font-medium">GitHub</span>
+                <span className="text-sm font-medium">
+                  GitHub
+                  {stars !== null && (
+                    <span className="ml-2 text-xs font-medium tabular-nums text-muted-foreground">
+                      {stars.toLocaleString("en-US")}
+                    </span>
+                  )}
+                </span>
                 <a
                   href="https://github.com/Parcoil/Sparkle"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
-                  aria-label="GitHub repository"
+                  aria-label={
+                    stars !== null
+                      ? `GitHub repository, ${stars.toLocaleString("en-US")} stars`
+                      : "GitHub repository"
+                  }
                 >
                   <GithubIcon className="h-5 w-5" />
                 </a>

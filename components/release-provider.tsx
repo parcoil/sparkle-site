@@ -9,6 +9,7 @@ const defaultReleaseInfo: ReleaseInfo = {
   downloads: "",
   exeUrl: "https://github.com/Parcoil/Sparkle/releases/latest",
   zipUrl: "https://github.com/Parcoil/Sparkle/releases/latest",
+  stars: null,
 };
 
 const ReleaseContext = createContext<ReleaseInfo>(defaultReleaseInfo);

@@ -9,6 +9,11 @@ export type ReleaseInfo = {
   downloads: string;
   exeUrl: string;
   zipUrl: string;
+  stars: number | null;
+};
+
+type GitHubRepo = {
+  stargazers_count?: number;
 };
 
 type GitHubAsset = {
@@ -27,6 +32,7 @@ const fallbackReleaseInfo: ReleaseInfo = {
   downloads: "",
   exeUrl: `https://github.com/${REPO}/releases/latest`,
   zipUrl: `https://github.com/${REPO}/releases/latest`,
+  stars: null,
 };
 
 async function fetchJson<T>(url: string): Promise<T | null> {
@@ -60,9 +66,10 @@ function countDownloads(releases: GitHubRelease[]) {
 }
 
 export const getReleaseInfo = cache(async (): Promise<ReleaseInfo> => {
-  const [latest, releases] = await Promise.all([
+  const [latest, releases, repo] = await Promise.all([
     fetchJson<GitHubRelease>(`${GITHUB_API}/releases/latest`),
     fetchJson<GitHubRelease[]>(`${GITHUB_API}/releases?per_page=100`),
+    fetchJson<GitHubRepo>(GITHUB_API),
   ]);
 
   const releaseList = Array.isArray(releases) ? releases : [];
@@ -88,5 +95,9 @@ export const getReleaseInfo = cache(async (): Promise<ReleaseInfo> => {
       (version
         ? buildAssetUrl(version, "win.zip")
         : fallbackReleaseInfo.zipUrl),
+    stars:
+      typeof repo?.stargazers_count === "number"
+        ? repo.stargazers_count
+        : fallbackReleaseInfo.stars,
   };
 });
