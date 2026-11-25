@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import {
   Menu,
   X,
@@ -51,6 +53,7 @@ export function DiscordIcon({ className }: { className?: string }) {
 
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
   const { exeUrl, zipUrl, stars } = useRelease();
 
   function handleDownload(type: "exe" | "zip") {
@@ -83,6 +86,10 @@ export default function Nav() {
           <div className="hidden items-center space-x-4 ml-6 md:flex">
             {navItems.map((item) => {
               const isExternalLink = !item.href.startsWith("/");
+              const isActive =
+                !isExternalLink &&
+                (pathname === item.href ||
+                  pathname.startsWith(`${item.href}/`));
 
               return (
                 <Link
@@ -90,10 +97,25 @@ export default function Nav() {
                   href={item.href}
                   target={isExternalLink ? "_blank" : undefined}
                   rel={isExternalLink ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "relative flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary",
+                    isActive ? "text-primary" : "text-foreground/80",
+                  )}
                 >
                   <span>{item.name}</span>
                   {isExternalLink && <ExternalLink className="h-3.5 w-3.5" />}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-underline"
+                      className="absolute -bottom-1 left-0 h-0.5 w-full rounded-full bg-primary"
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 35,
+                      }}
+                    />
+                  )}
                 </Link>
               );
             })}
@@ -161,16 +183,29 @@ export default function Nav() {
       {mobileMenuOpen && (
         <div className="border-t bg-background/95 backdrop-blur-lg md:hidden">
           <div className="space-y-1 px-2 pt-2 pb-3">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-foreground/80 hover:bg-accent/50 hover:text-foreground"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive =
+                item.href.startsWith("/") &&
+                (pathname === item.href ||
+                  pathname.startsWith(`${item.href}/`));
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "block rounded-md px-3 py-2 text-base font-medium hover:bg-accent/50",
+                    isActive
+                      ? "bg-accent/50 text-primary"
+                      : "text-foreground/80 hover:text-foreground",
+                  )}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
             <div className="space-y-2 px-3 py-2">
               <div className="flex items-center justify-between px-3 py-2">
                 <span className="text-sm font-medium">
