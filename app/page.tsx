@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Download, ChevronDown, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 import {
   DropdownMenu,
@@ -267,27 +267,13 @@ export default function Home() {
               variants={fadeInUp}
               transition={{ duration: 0.3, delay: 0.12 }}
             >
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button className="w-full justify-center sm:w-auto">
-                    <Download className="mr-2 h-4 w-4" />
-                    Download
-                    <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-full sm:w-56" align="start">
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={() => handleDownload("exe")}>
-                      <Download className="mr-2 h-4 w-4" />
-                      <span>Installer (.exe)</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleDownload("zip")}>
-                      <Download className="mr-2 h-4 w-4" />
-                      <span>Portable (.zip)</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <a
+                href={exeUrl}
+                className={`w-full justify-center sm:w-auto ${buttonVariants({ variant: "default" })}`}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download for Windows
+              </a>
             </motion.div>
 
             <motion.a
