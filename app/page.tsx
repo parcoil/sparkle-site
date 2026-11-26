@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import Script from "next/script";
+import { ThemedScreenshot } from "@/components/themed-screenshot";
 import {
   Accordion,
   AccordionItem,
@@ -348,23 +349,22 @@ export default function Home() {
             </Link>
           </motion.p>
 
-          <div className="relative w-full max-w-5xl flex flex-col items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.36 }}
-              className="absolute inset-0 dark:bg-accent/20 bg-primary/30 blur-3xl rounded-full -z-10"
-            ></motion.div>
-            <motion.img
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.42 }}
-              whileHover={{ scale: 1.05 }}
-              src="/showcase.png"
-              alt="Sparkle Logo"
-              className="mt-6 aspect-video w-full max-w-full rounded-md border-2 border-primary transition-all duration-300 sm:max-w-200 dark:border-accent relative z-10"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.42 }}
+            whileHover={{ scale: 1.05 }}
+            className="mt-10 w-full max-w-200"
+          >
+            <ThemedScreenshot
+              lightSrc="/sparkle_light.png"
+              darkSrc="/sparkle_dark.png"
+              alt="Sparkle app showcase"
+              width={1382}
+              height={761}
+              imageClassName="rounded-none border-0 shadow-none"
             />
-          </div>
+          </motion.div>
 
           <div className="w-full py-12">
             {/* <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -466,17 +466,22 @@ export default function Home() {
                   telemetry and more
                 </p>
               </div>
-              <motion.img
+              <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
                 variants={fadeInRight}
                 transition={{ duration: 0.4, delay: 0.05 }}
                 whileHover={{ scale: 1.02 }}
-                src="/tweaks_page.png"
-                alt="Tweaks Page"
-                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
-              />
+                className="w-full md:w-1/2"
+              >
+                <ThemedScreenshot
+                  lightSrc="/pages/sparkle-tweaks-light.png"
+                  darkSrc="/pages/sparkle-tweaks-dark.png"
+                  alt="Tweaks page"
+                  className="mr-5"
+                />
+              </motion.div>
             </motion.section>
 
             <motion.section
@@ -487,17 +492,22 @@ export default function Home() {
               transition={{ duration: 0.4 }}
               className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8"
             >
-              <motion.img
+              <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
                 variants={fadeInLeft}
                 transition={{ duration: 0.4, delay: 0.05 }}
                 whileHover={{ scale: 1.02 }}
-                src="/utilities_page.png"
-                alt="Utilities Page"
-                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
-              />
+                className="w-full md:w-1/2"
+              >
+                <ThemedScreenshot
+                  lightSrc="/pages/sparkle-utilities-light.png"
+                  darkSrc="/pages/sparkle-utilities-dark.png"
+                  alt="Utilities page"
+                  className="mr-5"
+                />
+              </motion.div>
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -540,17 +550,22 @@ export default function Home() {
                   Windows update cache, and logs to free up disk space.
                 </p>
               </motion.div>
-              <motion.img
+              <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
                 variants={fadeInRight}
                 transition={{ duration: 0.4, delay: 0.05 }}
                 whileHover={{ scale: 1.02 }}
-                src="/clean_page.png"
-                alt="Cleaner Page"
-                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
-              />
+                className="w-full md:w-1/2"
+              >
+                <ThemedScreenshot
+                  lightSrc="/pages/sparkle-clean-light.png"
+                  darkSrc="/pages/sparkle-clean-dark.png"
+                  alt="Cleaner page"
+                  className="mr-5"
+                />
+              </motion.div>
             </motion.section>
 
             <motion.section
@@ -561,17 +576,22 @@ export default function Home() {
               transition={{ duration: 0.4 }}
               className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8"
             >
-              <motion.img
+              <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
                 variants={fadeInLeft}
                 transition={{ duration: 0.4, delay: 0.05 }}
                 whileHover={{ scale: 1.02 }}
-                src="/restore_page.png"
-                alt="Restore Page"
-                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
-              />
+                className="w-full md:w-1/2"
+              >
+                <ThemedScreenshot
+                  lightSrc="/pages/sparkle-backup-light.png"
+                  darkSrc="/pages/sparkle-backup-dark.png"
+                  alt="Backup and restore page"
+                  className="mr-5"
+                />
+              </motion.div>
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -615,17 +635,22 @@ export default function Home() {
                   DNS settings to improve browsing speed and security.
                 </p>
               </motion.div>
-              <motion.img
+              <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
                 variants={fadeInRight}
                 transition={{ duration: 0.4, delay: 0.05 }}
                 whileHover={{ scale: 1.02 }}
-                src="/dns_page.png"
-                alt="DNS Page"
-                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
-              />
+                className="w-full md:w-1/2"
+              >
+                <ThemedScreenshot
+                  lightSrc="/pages/sparkle-dns-light.png"
+                  darkSrc="/pages/sparkle-dns-dark.png"
+                  alt="DNS changer page"
+                  className="ml-5"
+                />
+              </motion.div>
             </motion.section>
 
             <motion.section
@@ -636,17 +661,22 @@ export default function Home() {
               transition={{ duration: 0.4 }}
               className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 md:flex-row lg:px-8"
             >
-              <motion.img
+              <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
                 variants={fadeInLeft}
                 transition={{ duration: 0.4, delay: 0.05 }}
                 whileHover={{ scale: 1.02 }}
-                src="/apps_page.png"
-                alt="Apps Page"
-                className="w-full rounded-lg object-cover shadow-lg md:w-1/2"
-              />
+                className="w-full md:w-1/2"
+              >
+                <ThemedScreenshot
+                  lightSrc="/pages/sparkle-apps-light.png"
+                  darkSrc="/pages/sparkle-apps-dark.png"
+                  alt="Apps installer page"
+                  className="mr-5"
+                />
+              </motion.div>
               <motion.div
                 initial="hidden"
                 whileInView="visible"
