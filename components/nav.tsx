@@ -147,7 +147,12 @@ export default function Nav() {
                 <>
                   <Star className="h-4 w-4 text-yellow-500 fill-current" />
                   <span className="text-xs font-medium tabular-nums text-muted-foreground">
-                    {stars.toLocaleString("en-US")}
+                    {new Intl.NumberFormat("en-US", {
+                      notation: "compact",
+                      maximumFractionDigits: 1,
+                    })
+                      .format(stars)
+                      .replace("K", "k")}
                   </span>{" "}
                 </>
               )}
