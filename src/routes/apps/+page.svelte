@@ -1,5 +1,5 @@
 <script lang="ts">
-	import AppGallery from '$lib/components/AppGallery.svelte';
+	import AppGallery from '#lib/components/AppGallery.svelte';
 </script>
 
 <svelte:head>

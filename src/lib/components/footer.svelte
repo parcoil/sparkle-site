@@ -1,5 +1,5 @@
 <script lang="ts">
-	import commit from '$lib/commit';
+	import commit from '#lib/commit';
 </script>
 
 <footer

@@ -1,7 +1,7 @@
 ---
-title: "Sparkle Debloat Tool - A year later"
-date: "2026-08-22"
-description: "A look back on Sparkle a year later."
+title: 'Sparkle Debloat Tool - A year later'
+date: '2026-08-22'
+description: 'A look back on Sparkle a year later.'
 author: Thedogecraft
 cover: /blog/sparkle-a-year-later/header.webp
 ---

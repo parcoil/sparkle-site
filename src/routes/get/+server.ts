@@ -1,12 +1,11 @@
-
 export const GET = async () => {
 	const url = 'https://raw.githubusercontent.com/Parcoil/Sparkle/v2/get.ps1';
 	const res = await fetch(url);
 	if (!res.ok) return new Response('File not found', { status: 404 });
-    // all of this junk just to get ascii and emojis to work :(
+	// all of this junk just to get ascii and emojis to work :(
 	const text = await res.text();
 	const encoder = new TextEncoder(); // UTF-8
-	const bom = new Uint8Array([0xEF, 0xBB, 0xBF]); // UTF-8 BOM
+	const bom = new Uint8Array([0xef, 0xbb, 0xbf]); // UTF-8 BOM
 	const encoded = encoder.encode(text);
 
 	// Prepend BOM

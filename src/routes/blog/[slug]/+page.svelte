@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { Badge } from '$lib/components/ui/badge';
+	import { Badge } from '#lib/components/ui/badge/index.ts';
 	import {
 		formatDate,
 		getGithubAvatarUrl,
 		getGithubProfileUrl,
 		renderMarkdown
-	} from '$lib/blog';
+	} from '#lib/blog.ts';
 
 	let { data }: { data: PageData } = $props();
 </script>

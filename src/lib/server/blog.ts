@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { BlogPost } from '$lib/blog';
+import type { BlogPost } from '#lib/blog.ts';
 
 const BLOG_DIR = path.join(process.cwd(), 'blog');
 
@@ -26,9 +26,7 @@ export function getAllPosts(): BlogPost[] {
 		.filter((file) => file.endsWith('.md'))
 		.map((file) => {
 			const slug = file.replace(/\.md$/, '');
-			const raw = fs
-				.readFileSync(path.join(BLOG_DIR, file), 'utf-8')
-				.replace(/\r\n/g, '\n');
+			const raw = fs.readFileSync(path.join(BLOG_DIR, file), 'utf-8').replace(/\r\n/g, '\n');
 			const post: BlogPost = {
 				slug,
 				title: '',

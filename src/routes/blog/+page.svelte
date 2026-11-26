@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import * as Card from '$lib/components/ui/card';
-	import { Badge } from '$lib/components/ui/badge';
-	import { formatDate, getGithubAvatarUrl, getGithubProfileUrl } from '$lib/blog';
+	import * as Card from '#lib/components/ui/card/index.ts';
+	import { Badge } from '#lib/components/ui/badge/index.ts';
+	import { formatDate, getGithubAvatarUrl, getGithubProfileUrl } from '#lib/blog.ts';
 
 	let { data }: { data: PageData } = $props();
 </script>

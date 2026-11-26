@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { getAllPosts, getPostBySlug } from '$lib/server/blog';
+import { getAllPosts, getPostBySlug } from '#lib/server/blog.ts';
 
 export const entries = () => {
 	return getAllPosts().map((post) => ({ slug: post.slug }));

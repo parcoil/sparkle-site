@@ -1,17 +1,26 @@
 <script lang="ts">
 	import '../app.css';
 	import { ModeWatcher } from 'mode-watcher';
-	import Nav from '$lib/components/nav.svelte';
-	import Footer from '$lib/components/footer.svelte';
-	import { browser } from '$app/environment';
-	import { Toaster } from '$lib/components/ui/sonner/index.js';
+	import Nav from '#lib/components/nav.svelte';
+	import Footer from '#lib/components/footer.svelte';
+	import { browser } from '$app/env';
+	import { Toaster } from '#lib/components/ui/sonner/index.js';
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
 	import posthog from 'posthog-js';
 	let { children } = $props();
 
 	if (browser) {
-		beforeNavigate(() => posthog.capture('$pageleave'));
-		afterNavigate(() => posthog.capture('$pageview'));
+		beforeNavigate(({ shallow, type }) => {
+			if (shallow && type === 'goto') return;
+
+			return posthog.capture('$pageleave');
+		});
+
+		afterNavigate(({ shallow, type }) => {
+			if (shallow && type === 'goto') return;
+
+			return posthog.capture('$pageview');
+		});
 	}
 </script>
 

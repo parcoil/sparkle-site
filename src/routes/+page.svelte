@@ -14,15 +14,15 @@
 		Wrench,
 		ArrowRight
 	} from '@lucide/svelte';
-	import { Button } from '$lib/components/ui/button';
-	import * as Card from '$lib/components/ui/card';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import { Alert, AlertTitle } from '$lib/components/ui/alert';
-	import * as Accordion from '$lib/components/ui/accordion';
-	import CodeTabs from '$lib/components/code-tabs.svelte';
-	import { page } from '$app/stores';
+	import { Button } from '#lib/components/ui/button/index.ts';
+	import * as Card from '#lib/components/ui/card/index.ts';
+	import * as DropdownMenu from '#lib/components/ui/dropdown-menu/index.ts';
+	import { Alert, AlertTitle } from '#lib/components/ui/alert/index.ts';
+	import * as Accordion from '#lib/components/ui/accordion/index.ts';
+	import CodeTabs from '#lib/components/code-tabs.svelte';
+	import { page } from '$app/state';
 	import posthog from 'posthog-js';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { toast } from 'svelte-sonner';
 
 	let showMovedAlert = $state(false);
@@ -229,8 +229,17 @@
 	/>
 
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getsparkle.net/" />
-	<meta property="og:title" content="Sparkle | Ultimate Windows Optimizer" />
+
+	<meta
+		property="og:url"
+		content="https://getsparkle.net/"
+	/>
+
+	<meta
+		property="og:title"
+		content="Sparkle | Ultimate Windows Optimizer"
+	/>
+
 	<meta
 		property="og:description"
 		content="Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download now for a faster, cleaner Windows experience."
@@ -241,7 +250,12 @@
 	<meta property="og:image:alt" content="Sparkle - Ultimate Windows Optimizer" />
 
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Sparkle | Ultimate Windows Optimizer" />
+
+	<meta
+		name="twitter:title"
+		content="Sparkle | Ultimate Windows Optimizer"
+	/>
+
 	<meta
 		name="twitter:description"
 		content="Free, open-source tool to optimize Windows, remove bloatware, and boost your PC's performance. Download now!"
@@ -257,10 +271,16 @@
 	></script>
 </svelte:head>
 
-<div class="mt-10 flex min-h-screen flex-col items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
-	<div class="flex w-full max-w-5xl flex-col items-center justify-center">
-		{#if $page.url.searchParams.get('ref') === 'parcoil-sparkle-page'}
-			<div class="animate-fade-in-up mt-4 mb-6 w-full max-w-md">
+<div
+	class="mt-10 flex min-h-screen flex-col items-center justify-center px-4 py-6 sm:px-6 lg:px-8"
+>
+	<div
+		class="flex w-full max-w-5xl flex-col items-center justify-center"
+	>
+		{#if page.url.searchParams.get('ref') === 'parcoil-sparkle-page'}
+			<div
+				class="animate-fade-in-up mt-4 mb-6 w-full max-w-md"
+			>
 				<Alert class="text-center">
 					<AlertTitle>Hello Parcoil user, Sparkle has moved to getsparkle.net</AlertTitle>
 				</Alert>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Copy, Info } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 
 	const command = 'irm https://getsparkle.net/debloatscript | iex';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Check, Copy } from '@lucide/svelte';
-	import { cn } from '$lib/utils';
+	import { cn } from '#lib/utils.ts';
 
 	interface Tab {
 		label: string;

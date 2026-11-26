@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { Download } from '@lucide/svelte';
-	import { Button } from '$lib/components/ui/button';
-	import * as Card from '$lib/components/ui/card';
-	import { Badge } from '$lib/components/ui/badge';
-	import CodeTabs from '$lib/components/code-tabs.svelte';
-	import GithubIcon from '$lib/components/githubicon.svelte';
+	import { Button } from '#lib/components/ui/button/index.ts';
+	import * as Card from '#lib/components/ui/card/index.ts';
+	import { Badge } from '#lib/components/ui/badge/index.ts';
+	import CodeTabs from '#lib/components/code-tabs.svelte';
+	import GithubIcon from '#lib/components/githubicon.svelte';
 	import posthog from 'posthog-js';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 
 	let version = $state('');
 	let downloads = $state('');

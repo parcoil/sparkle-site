@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import posthog from 'posthog-js';
-	import { Button } from '$lib/components/ui/button';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { Button } from '#lib/components/ui/button/index.ts';
+	import * as DropdownMenu from '#lib/components/ui/dropdown-menu/index.ts';
 	import {
 		Menu,
 		X,
@@ -111,33 +111,33 @@
 				</a>
 				<ModeToggle />
 				<div class="hidden md:block">
-				<DropdownMenu.Root>
-					<DropdownMenu.Trigger>
-						<Button>
-							<Download class="mr-2 h-4 w-4" />
-							Download
-							<ChevronDown class="ml-2 h-4 w-4 opacity-50" />
-						</Button>
-					</DropdownMenu.Trigger>
-					<DropdownMenu.Content class="w-48" align="end">
-						<DropdownMenu.Group>
-							<DropdownMenu.Item onSelect={() => handleDownload('exe')}>
+					<DropdownMenu.Root>
+						<DropdownMenu.Trigger>
+							<Button>
 								<Download class="mr-2 h-4 w-4" />
-								<span>Installer (.exe)</span>
-							</DropdownMenu.Item>
-							<DropdownMenu.Item onSelect={() => handleDownload('zip')}>
-								<Download class="mr-2 h-4 w-4" />
-								<span>Portable (.zip)</span>
-							</DropdownMenu.Item>
-						</DropdownMenu.Group>
-					</DropdownMenu.Content>
-				</DropdownMenu.Root>
+								Download
+								<ChevronDown class="ml-2 h-4 w-4 opacity-50" />
+							</Button>
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content class="w-48" align="end">
+							<DropdownMenu.Group>
+								<DropdownMenu.Item onSelect={() => handleDownload('exe')}>
+									<Download class="mr-2 h-4 w-4" />
+									<span>Installer (.exe)</span>
+								</DropdownMenu.Item>
+								<DropdownMenu.Item onSelect={() => handleDownload('zip')}>
+									<Download class="mr-2 h-4 w-4" />
+									<span>Portable (.zip)</span>
+								</DropdownMenu.Item>
+							</DropdownMenu.Group>
+						</DropdownMenu.Content>
+					</DropdownMenu.Root>
 				</div>
 			</div>
 
 			<div class="ml-2 shrink-0 md:hidden">
 				<button
-					onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
+					onclick={() => mobileMenuOpen = !mobileMenuOpen}
 					class="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 hover:text-foreground focus:outline-none"
 				>
 					<span class="sr-only">Open main menu</span>
@@ -158,10 +158,8 @@
 					<a
 						href={item.href}
 						class="block rounded-md px-3 py-2 text-base font-medium text-foreground/80 hover:bg-accent/50 hover:text-foreground"
-						onclick={() => (mobileMenuOpen = false)}
-					>
-						{item.name}
-					</a>
+						onclick={() => mobileMenuOpen = false}
+					>{item.name}</a>
 				{/each}
 				<div class="space-y-2 px-3 py-2">
 					<div class="flex items-center justify-between px-3 py-2">
