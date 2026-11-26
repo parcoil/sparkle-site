@@ -1,31 +1,14 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import * as DropdownMenu from '#lib/components/ui/dropdown-menu/index.ts';
-	let version = $state('');
-	import { onMount } from 'svelte';
 	import { Download, ChevronDown, ExternalLink } from '@lucide/svelte';
-	onMount(async () => {
-		try {
-			const response = await fetch('https://api.github.com/repos/parcoil/sparkle/releases/latest');
-			const data = await response.json();
-			version = data.tag_name;
-		} catch (error) {
-			console.error('Failed to fetch version:', error);
-		}
-	});
+	import { fallbackReleaseInfo } from '#lib/releases.ts';
+
+	const releaseInfo = $derived(page.data.releaseInfo ?? fallbackReleaseInfo);
 
 	function handleDownload(type: 'exe' | 'zip') {
-		if (type === 'exe') {
-			window.open(
-				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`,
-				'_blank'
-			);
-		} else {
-			window.open(
-				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-win.zip`,
-				'_blank'
-			);
-		}
+		window.open(type === 'exe' ? releaseInfo.exeUrl : releaseInfo.zipUrl, '_blank', 'noopener,noreferrer');
 	}
 </script>
 

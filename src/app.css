@@ -275,6 +275,43 @@ body,
 	animation-delay: 0.7s;
 }
 
+.reveal-left,
+.reveal-right,
+.reveal-up {
+	opacity: 0;
+	transition:
+		opacity 0.5s ease-out,
+		transform 0.5s ease-out;
+	will-change: opacity, transform;
+}
+
+.reveal-left {
+	transform: translateX(-30px);
+}
+
+.reveal-right {
+	transform: translateX(30px);
+}
+
+.reveal-up {
+	transform: translateY(20px);
+}
+
+.reveal-visible {
+	opacity: 1;
+	transform: translate(0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal-left,
+	.reveal-right,
+	.reveal-up {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
 body::selection {
 	background-color: var(--accent);
 	color: var(--accent-foreground);

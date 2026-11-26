@@ -1,41 +1,18 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { page } from '$app/state';
+	import { browser } from '$app/env';
 	import { Download } from '@lucide/svelte';
 	import { Button } from '#lib/components/ui/button/index.ts';
 	import * as Card from '#lib/components/ui/card/index.ts';
 	import { Badge } from '#lib/components/ui/badge/index.ts';
 	import CodeTabs from '#lib/components/code-tabs.svelte';
 	import GithubIcon from '#lib/components/githubicon.svelte';
+	import { fallbackReleaseInfo } from '#lib/releases.ts';
 	import posthog from 'posthog-js';
-	import { browser } from '$app/env';
 
-	let version = $state('');
-	let downloads = $state('');
-
-	onMount(async () => {
-		try {
-			const res = await fetch('https://api.github.com/repos/parcoil/sparkle/releases/latest');
-			const data = await res.json();
-			version = data.tag_name;
-
-			const releasesRes = await fetch('https://api.github.com/repos/parcoil/sparkle/releases');
-			const releases = await releasesRes.json();
-			let total = 0;
-			releases.forEach((release: any) => {
-				const v = release.tag_name;
-				if (v && v >= '2.0.0') {
-					release.assets.forEach((asset: any) => {
-						if (asset.name.endsWith('.exe') || asset.name.endsWith('.zip')) {
-							total += asset.download_count || 0;
-						}
-					});
-				}
-			});
-			downloads = total.toLocaleString('en-US');
-		} catch {
-			console.error('Failed to fetch release data');
-		}
-	});
+	const releaseInfo = $derived(page.data.releaseInfo ?? fallbackReleaseInfo);
+	const version = $derived(releaseInfo.version);
+	const downloads = $derived(releaseInfo.downloads);
 
 	function handleDownload(type: 'exe' | 'zip') {
 		if (browser) {
@@ -46,17 +23,7 @@
 			});
 		}
 
-		if (type === 'exe') {
-			window.open(
-				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-setup.exe`,
-				'_blank'
-			);
-		} else {
-			window.open(
-				`https://github.com/Parcoil/Sparkle/releases/latest/download/sparkle-${version.replace('v', '')}-win.zip`,
-				'_blank'
-			);
-		}
+		window.open(type === 'exe' ? releaseInfo.exeUrl : releaseInfo.zipUrl, '_blank', 'noopener,noreferrer');
 	}
 
 	const installMethods = [
